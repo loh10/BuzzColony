@@ -66,14 +66,22 @@ namespace Dodo.SerializedCollections
         }
 
         // Assign a task to an agent
-        public void AssignTaskToAgent(Agent agent, string taskName)
+        public void AssignTaskToAgent(Agent agent, string taskName, Dictionary<string, int> dynamicParameters = null)
         {
             MyTask task = GetTaskByName(taskName);
             if (task != null)
             {
+                // If there are dynamic parameters like resource quantity, set them in the task
+                if (dynamicParameters != null)
+                {
+                    task.SetDynamicParameters(dynamicParameters);
+                }
+
+                // Assign the task to the agent
                 agent.AddTask(task);
             }
         }
+
     }
 
 }

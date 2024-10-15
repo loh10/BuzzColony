@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Dodo.SerializedCollections
@@ -11,7 +10,7 @@ namespace Dodo.SerializedCollections
         [SerializedDictionary]
         public SerializedDictionary<string, int> resources = new SerializedDictionary<string, int>();
 
-    private void Awake()
+        private void Awake()
         {
             //DontDestroyOnLoad(gameObject);
             if (Instance != null && Instance != this)
@@ -42,7 +41,7 @@ namespace Dodo.SerializedCollections
             {
                 resources[resourceName] = amount;
             }
-            Debug.Log($"{amount} {resourceName} added. Current {resourceName}: {resources[resourceName]}");
+            //Debug.Log($"{amount} {resourceName} added. Current {resourceName}: {resources[resourceName]}");
         }
 
         // Removes a resource from the resource pool if available

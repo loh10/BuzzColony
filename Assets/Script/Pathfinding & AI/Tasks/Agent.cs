@@ -6,17 +6,21 @@ namespace Dodo.SerializedCollections
 {
     public class Agent : MonoBehaviour
     {
+        [SerializeField]
         public List<MyTask> TaskList = new List<MyTask>();
 
-        private TaskManager taskManager;
-
         // Simulated resource available for tasks
-        private int woodAvailable = 0;
+        private Dictionary<string, int> resourcesAvailable = new Dictionary<string, int>();
+        public bool isWorking;
+        public GameObject tree;
+        public float speed;
 
         private void Start()
         {
-            // Find the TaskManager in the scene
-            taskManager = FindObjectOfType<TaskManager>();
+
+            // Initialize resources (e.g., wood and stone)
+            resourcesAvailable["Wood"] = 0;
+            resourcesAvailable["Stone"] = 0;
 
             // Start the task execution routine
             StartCoroutine(PerformTaskRoutine());
@@ -38,21 +42,20 @@ namespace Dodo.SerializedCollections
         // Checks if the task's dependencies are met before execution
         public bool AreDependenciesMet(MyTask task)
         {
-            // Example: Check if there's enough wood to build
-            if (task.TaskName == "Build Camp" && woodAvailable < 5)
+            // Iterate through the dynamic parameters to see if resource requirements are met
+            foreach (var resourceRequirement in task.DynamicParameters)
             {
-                Debug.Log("Not enough wood to build. Need to collect wood.");
-                return false;
+                string resourceName = resourceRequirement.Key;
+                int requiredAmount = resourceRequirement.Value;
+
+                // If we don't have enough of a required resource, return false
+                //if (resourcesAvailable.ContainsKey(resourceName) && resourcesAvailable[resourceName] < requiredAmount)
+                //{
+                //    Debug.Log($"Not enough {resourceName}. Need to collect {requiredAmount - resourcesAvailable[resourceName]} more.");
+                //    return false;
+                //}
             }
 
-            // Check each dependency and make sure they are fulfilled
-            foreach (string dependency in task.Dependencies)
-            {
-                if (dependency == "Collect Wood" && woodAvailable < 5)
-                {
-                    return false;
-                }
-            }
             return true;
         }
 
@@ -68,16 +71,32 @@ namespace Dodo.SerializedCollections
                     // Check if the task's dependencies are fulfilled
                     if (AreDependenciesMet(currentTask))
                     {
+                        isWorking = true;
                         Debug.Log("Performing task: " + currentTask.TaskName);
 
                         // Execute the task
-                        yield return StartCoroutine(ExecuteTask(currentTask.TaskName, 2.0f));
+                        yield return StartCoroutine(ExecuteTask(currentTask));
 
-                        // Example: If the task is to collect wood, increment available wood
-                        if (currentTask.TaskName == "Collect Wood")
+                        // Handle specific task results (like resource collection)
+                        if (currentTask.TaskName == "Collect Resources")
                         {
-                            woodAvailable += 5;
-                            Debug.Log("Collected wood. Wood available: " + woodAvailable);
+                            foreach (var resourceRequirement in currentTask.DynamicParameters)
+                            {
+                                string resourceName = resourceRequirement.Key;
+                                int collectedAmount = resourceRequirement.Value;
+
+                                // Add the collected resource to the available resources
+                                if (resourcesAvailable.ContainsKey(resourceName))
+                                {
+                                    resourcesAvailable[resourceName] += collectedAmount;
+                                }
+                                else
+                                {
+                                    resourcesAvailable[resourceName] = collectedAmount;
+                                }
+                                //Test
+                                Debug.Log($"Collected {collectedAmount} units of {resourceName}. Available: {resourcesAvailable[resourceName]}");
+                            }
                         }
 
                         // Remove completed task from the list
@@ -85,14 +104,8 @@ namespace Dodo.SerializedCollections
                     }
                     else
                     {
-                        // If dependencies are not met, add the dependent task
-                        foreach (string dependency in currentTask.Dependencies)
-                        {
-                            if (dependency == "Collect Wood")
-                            {
-                                //taskManager.AssignTaskToAgent(this, "Collect Wood");
-                            }
-                        }
+                        // Handle unmet dependencies (you could assign new tasks here)
+                        Debug.Log($"Cannot perform task '{currentTask.TaskName}' yet. Dependencies not met.");
                     }
                 }
 
@@ -101,12 +114,19 @@ namespace Dodo.SerializedCollections
         }
 
         // Simulates the execution of a task
-        IEnumerator ExecuteTask(string taskName, float duration)
+        IEnumerator ExecuteTask(MyTask task)
         {
-            // Simulate task duration
-            yield return new WaitForSeconds(duration);
+            // Simulate task duration (you can customize this per task)
+            yield return new WaitForSeconds(2.0f); // Example: task takes 2 seconds to complete
+        }
+
+        private void Update()
+        {
+            if (isWorking)
+            {
+                float step = speed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, tree.transform.position, step);
+            }
         }
     }
 }
-
-
