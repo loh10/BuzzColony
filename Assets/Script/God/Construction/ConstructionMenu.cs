@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -33,12 +34,51 @@ public class ConstructionMenu : MonoBehaviour
     [SerializeField] private GameObject _zoneAtterissage;
     Vector2 _zoneAtterissageSize = new Vector2(3, 7);
     #endregion
+    public Dictionary<string,Vector2> constructionList = new Dictionary<string, Vector2>();
 
     private void Start()
     {
         _marketMenu.SetActive(false);
+        if (SaveAndLoad.Instance != null)
+        {
+            SaveAndLoad.Instance.LoadGame();
+            constructionList = SaveAndLoad.Instance._construction;
+            BuildAllBatiment();
+        }
+        print(constructionList.Count);
     }
 
+    private void BuildAllBatiment()
+    {
+        foreach (var construction in constructionList)
+        {
+            if (construction.Key == "House")
+            {
+                _currentConstruction = Instantiate(_habitation, construction.Value, Quaternion.identity, _constructionParent);
+                _size = _habitationSize;
+                _tagToAdd = "House";
+            }
+            if (construction.Key == "Storage")
+            {
+                _currentConstruction = Instantiate(_reserve, construction.Value, Quaternion.identity, _constructionParent);
+                _size = _reserveSize;
+                _tagToAdd = "Storage";
+            }
+            if (construction.Key == "Field")
+            {
+                _currentConstruction = Instantiate(_champs, construction.Value, Quaternion.identity, _constructionParent);
+                _size = _champsSize;
+                _tagToAdd = "Field";
+            }
+            if (construction.Key == "LandingZone")
+            {
+                _currentConstruction = Instantiate(_zoneAtterissage, construction.Value, Quaternion.identity, _constructionParent);
+                _size = _zoneAtterissageSize;
+                _tagToAdd = "LandingZone";
+            }
+        }
+    }
+    
     private void Update()
     {
         if (_currentConstruction != null)
@@ -52,7 +92,10 @@ public class ConstructionMenu : MonoBehaviour
                 if (canBuild)
                 {
                     _currentConstruction.tag = _tagToAdd;
+                    constructionList.Add(_tagToAdd,constructionPosition);
                     _currentConstruction = null;
+                    SaveAndLoad.Instance.SaveConstruction(constructionList);
+                    SaveAndLoad.Instance.SaveGame();
                 } 
             }
         }

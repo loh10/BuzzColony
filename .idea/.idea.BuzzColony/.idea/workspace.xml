@@ -7,7 +7,9 @@
     <list default="true" id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Camera/CameraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Camera/CameraMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +51,7 @@
     "Attach to Unity Editor.Attach to Unity Editor & Play.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Standalone Player.Start Unity.executor": "Debug",
-    "git-widget-placeholder": "MapButton",
+    "git-widget-placeholder": "SaveAndLoadConstruction",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
