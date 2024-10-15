@@ -18,7 +18,8 @@ public class Spawning
             {
                 GameObject collision = collider.gameObject;
                 if (collision.CompareTag("Wood") || collision.CompareTag("Rock") || collision.CompareTag("Mountain") ||
-                    collision.CompareTag("Meat"))
+                    collision.CompareTag("Meat") || collision.CompareTag("House") || collision.CompareTag("Storage") ||
+                    collision.CompareTag("Field") || collision.CompareTag("LandingZone"))
                 {
                     canBuild = false;
                     return Vector3.zero;

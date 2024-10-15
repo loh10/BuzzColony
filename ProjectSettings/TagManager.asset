@@ -8,6 +8,10 @@ TagManager:
   - Mountain
   - Rock
   - Meat
+  - House
+  - Storage
+  - Field
+  - LandingZone
   layers:
   - Default
   - TransparentFX
