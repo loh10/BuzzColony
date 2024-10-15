@@ -9,8 +9,8 @@ public class Spawning
         Vector3 worldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPosition = tilemap.WorldToCell(worldPoint);
         Vector3 cellCenterPosition = tilemap.GetCellCenterWorld(cellPosition);
-
-        if (tilemap.HasTile(cellPosition))
+        bool isOverUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+        if (tilemap.HasTile(cellPosition)&& !isOverUI)
         {
             // Check if there is already wood on this tile
             Collider2D[] colliders = Physics2D.OverlapCircleAll(cellCenterPosition, 0.1f);
