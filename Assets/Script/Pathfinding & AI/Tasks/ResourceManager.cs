@@ -24,6 +24,14 @@ namespace AYellowpaper.SerializedCollections
             }
         }
 
+        private void Start()
+        {
+            //Initialize dictionary values
+            AddResource("Wood", 0);
+            AddResource("Stone", 0);
+            AddResource("Meat", 0);
+        }
+
         public void AddResource(string resourceName, int amount)
         {
             if (resources.ContainsKey(resourceName))

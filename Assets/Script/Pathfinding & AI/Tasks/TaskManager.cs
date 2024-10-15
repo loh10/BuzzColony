@@ -43,7 +43,10 @@ namespace AYellowpaper.SerializedCollections
             AllTasks.Add("Build Camp", new MyTask("Build Camp", 2, null, new List<string> { "Collect Resources" }));
             AllTasks.Add("Eat Food", new MyTask("Eat Food", 0));
 
-            Tasks.Add("Collect Resources");
+            Tasks.Add("Collect Wood");
+            Tasks.Add("Collect Stone");
+            Tasks.Add("Collect Meat");
+
             Tasks.Add("Build Camp");
             Tasks.Add("Eat Food");
         }
