@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wood
+  - Mountain
+  - Rock
+  - Meat
   layers:
   - Default
   - TransparentFX

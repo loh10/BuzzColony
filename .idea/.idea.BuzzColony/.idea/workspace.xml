@@ -4,13 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a0ddc60c-6df3-4646-9d3f-5b4c93d993f8" name="Changes" comment="">
+    <list default="true" id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MenuPrincipal.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GeneratorMap.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/GeneratorMap.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/MenuPrincipal/MenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/MenuPrincipal/MenuManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TileMapBuzzColony.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TileMapBuzzColony.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/MapGen/GeneratorMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/MapGen/GeneratorMap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/jaune.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/jaune.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/jaune2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/jaune2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/marron.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/marron.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/vert.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/vert.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/vert2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/sprite/vert2.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +33,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0b78209fd00d4f419f30dd210cbab239176600/db/9b39e469/Component.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Camera/CameraMovement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMPro_UGUI_Private.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../RAID-2024/RAID-2024/Assets/Scripts/General/SaveLoadJson.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UnityProject/GenproceduralURP/Assets/NewBehaviourScript.cs" root0="SKIP_HIGHLIGHTING" />
@@ -36,6 +46,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2nF1d7sXTIy5aYkFln1DY2pfCl3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -45,13 +58,13 @@
     &quot;Attach to Unity Editor.Attach to Unity Editor &amp; Play.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Standalone Player.Start Unity.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;MapGeneration&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;SpawnRessource&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -96,7 +109,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a0ddc60c-6df3-4646-9d3f-5b4c93d993f8" name="Changes" comment="" />
+      <changelist id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="" />
       <created>1728554097598</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -107,6 +120,13 @@
       <workItem from="1728579094264" duration="3111000" />
       <workItem from="1728586354090" duration="727000" />
       <workItem from="1728631448382" duration="3317000" />
+      <workItem from="1728636356803" duration="6666000" />
+      <workItem from="1728837167801" duration="51000" />
+      <workItem from="1728837250849" duration="30000" />
+      <workItem from="1728895697537" duration="3145000" />
+      <workItem from="1728906043770" duration="9104000" />
+      <workItem from="1728915561288" duration="3908000" />
+      <workItem from="1728980215856" duration="5053000" />
     </task>
     <servers />
   </component>
@@ -122,5 +142,9 @@
   <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

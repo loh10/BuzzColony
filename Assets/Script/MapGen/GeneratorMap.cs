@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -33,8 +34,12 @@ public class GeneratorMap : MonoBehaviour
 
     void Start()
     {
-        SaveAndLoad.Instance.LoadGame();
-        seed = SaveAndLoad.Instance._seed;
+        ClearTileMaps();
+        if (SaveAndLoad.Instance != null)
+        {
+            SaveAndLoad.Instance.LoadGame();
+            seed = SaveAndLoad.Instance._seed;
+        }
         GenerateMap();
     }
     
@@ -49,7 +54,6 @@ public class GeneratorMap : MonoBehaviour
 /// </summary>
     void GenerateMap()
     {
-        ClearTileMaps();
         for (int i = 0; i < mapScale; i++)
         {
             for (int j = 0; j < mapScale; j++)
@@ -112,4 +116,5 @@ public class GeneratorMap : MonoBehaviour
 
         return number;
     }
+
 }
