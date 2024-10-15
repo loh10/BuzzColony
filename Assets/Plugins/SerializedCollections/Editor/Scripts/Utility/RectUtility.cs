@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AYellowpaper.SerializedCollections.Editor
+namespace Dodo.SerializedCollections.Editor
 {
     public static class RectUtility
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-namespace AYellowpaper.SerializedCollections.Editor
+namespace Dodo.SerializedCollections.Editor
 {
     public class PagingElement
     {

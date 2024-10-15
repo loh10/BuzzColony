@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AYellowpaper.SerializedCollections.KeysGenerators
+namespace Dodo.SerializedCollections.KeysGenerators
 {
     [KeyListGenerator("Populate Enum", typeof(System.Enum), false)]
     public class EnumGenerator : KeyListGenerator

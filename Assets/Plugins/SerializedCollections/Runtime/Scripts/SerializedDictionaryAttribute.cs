@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-namespace AYellowpaper.SerializedCollections
+namespace Dodo.SerializedCollections
 {
     [Conditional("UNITY_EDITOR")]
     public class SerializedDictionaryAttribute : Attribute

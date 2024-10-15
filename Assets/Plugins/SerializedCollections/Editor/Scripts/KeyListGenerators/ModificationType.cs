@@ -1,4 +1,4 @@
-namespace AYellowpaper.SerializedCollections
+namespace Dodo.SerializedCollections
 {
     public enum ModificationType
     {

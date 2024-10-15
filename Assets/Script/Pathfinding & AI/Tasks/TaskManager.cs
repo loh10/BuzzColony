@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AYellowpaper.SerializedCollections
+namespace Dodo.SerializedCollections
 {
     public class TaskManager : MonoBehaviour
     {

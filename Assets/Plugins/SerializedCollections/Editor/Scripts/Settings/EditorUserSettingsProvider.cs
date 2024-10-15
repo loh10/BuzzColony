@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
 
-namespace AYellowpaper.SerializedCollections.Editor
+namespace Dodo.SerializedCollections.Editor
 {
     public class EditorUserSettingsProvider : SettingsProvider
     {

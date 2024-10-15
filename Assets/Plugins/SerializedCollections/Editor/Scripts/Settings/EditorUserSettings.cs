@@ -5,7 +5,7 @@ using UnityEditor;
 using System.IO;
 using System;
 
-namespace AYellowpaper.SerializedCollections.Editor
+namespace Dodo.SerializedCollections.Editor
 {
     public sealed class EditorUserSettings : ScriptableObject
     {

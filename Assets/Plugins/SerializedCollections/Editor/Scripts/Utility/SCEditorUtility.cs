@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using System.Linq;
-using AYellowpaper.SerializedCollections.Editor.Data;
+using Dodo.SerializedCollections.Editor.Data;
 using UnityEngine;
 using System.Collections;
 
-namespace AYellowpaper.SerializedCollections.Editor
+namespace Dodo.SerializedCollections.Editor
 {
     internal static class SCEditorUtility
     {

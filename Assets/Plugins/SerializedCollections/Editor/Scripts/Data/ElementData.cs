@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AYellowpaper.SerializedCollections.Editor.Data
+namespace Dodo.SerializedCollections.Editor.Data
 {
     [System.Serializable]
     internal class ElementData

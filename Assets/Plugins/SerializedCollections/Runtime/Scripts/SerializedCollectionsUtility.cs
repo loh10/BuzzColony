@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AYellowpaper.SerializedCollections
+namespace Dodo.SerializedCollections
 {
     public static class SerializedCollectionsUtility
     {

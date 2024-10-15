@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AYellowpaper.SerializedCollections.KeysGenerators
+namespace Dodo.SerializedCollections.KeysGenerators
 {
     public class KeyListGeneratorData
     {

@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace AYellowpaper.SerializedCollections.KeysGenerators
+namespace Dodo.SerializedCollections.KeysGenerators
 {
     public class KeyListGeneratorSelectorWindow : EditorWindow
     {

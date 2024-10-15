@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace AYellowpaper.SerializedCollections.Editor.Search
+namespace Dodo.SerializedCollections.Editor.Search
 {
     public class PropertySearchResult
     {
