@@ -8,12 +8,13 @@ public class GameData
     //Map
     public int SEED;
 }
+
 public class SaveAndLoad : MonoBehaviour
 {
     public static SaveAndLoad Instance;
     private GameData _gameData;
     private string _saveFilePath;
-    
+
     //Map
     public int _seed;
 
@@ -41,11 +42,12 @@ public class SaveAndLoad : MonoBehaviour
     {
         _gameData.SEED = _seed;
     }
+
     public void SaveGame()
     {
         SaveInformation();
         string savePlayerData = JsonUtility.ToJson(_gameData);
-        File.WriteAllText(_saveFilePath,savePlayerData);
+        File.WriteAllText(_saveFilePath, savePlayerData);
     }
 
     public void LoadGame()
@@ -57,7 +59,7 @@ public class SaveAndLoad : MonoBehaviour
             _seed = _gameData.SEED;
         }
     }
-    
+
     public void DeleteSaveFile()
     {
         if (File.Exists(_saveFilePath))

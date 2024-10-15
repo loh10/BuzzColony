@@ -49,14 +49,17 @@ public class CameraMovement : MonoBehaviour
         {
             move.x += speed * Time.deltaTime;
         }
+
         if (Input.mousePosition.x <= edgeDist)
         {
             move.x -= speed * Time.deltaTime;
         }
+
         if (Input.mousePosition.y >= Screen.height - edgeDist)
         {
             move.y += speed * Time.deltaTime;
         }
+
         if (Input.mousePosition.y <= edgeDist)
         {
             move.y -= speed * Time.deltaTime;
@@ -81,7 +84,7 @@ public class CameraMovement : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0.0f)
         {
-            camera.orthographicSize = Mathf.Clamp(camera.orthographicSize - (scroll*speed), minZoom, maxZoom);
+            camera.orthographicSize = Mathf.Clamp(camera.orthographicSize - (scroll * speed), minZoom, maxZoom);
         }
     }
 

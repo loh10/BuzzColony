@@ -7,51 +7,69 @@ using UnityEngine;
 public class SpawningMenu : MonoBehaviour
 {
     public List<GameObject> buttonRessources;
-    private bool wasActive;
-    [SerializeField]private TextMeshProUGUI textToChange;
+    private bool isActive;
+    [SerializeField] private TextMeshProUGUI textToChange;
+    [SerializeField] private ConstructionMenu _constructionMenu;
     public GameObject spawnRessources;
-    
+
+
     void Start()
     {
         EnableAll(false);
     }
 
-    private void EnableAll(bool isActive)
+    private void EnableAll(bool wasActive)
     {
         foreach (GameObject button in buttonRessources)
         {
-            button.SetActive(isActive);
+            button.SetActive(wasActive);
         }
     }
 
     public void ButtonAppear()
     {
-        DisableAllRessource();
-        wasActive = !wasActive;
-        EnableAll(wasActive);
-        textToChange.text = wasActive ? "X" : "Ressources";
+        UnactiveScripts();
+        CloseOtherMenu();
+        isActive = !isActive;
+        textToChange.text = isActive ? "X" : "Ressources";
+        EnableAll(isActive);
     }
-    
+
     public void SpawnWood()
     {
-        DisableAllRessource();
+        UnactiveScripts();
         spawnRessources.GetComponent<SpawningWood>().enabled = true;
     }
+
     public void SpawnRock()
     {
-        DisableAllRessource();
+        UnactiveScripts();
         spawnRessources.GetComponent<SpawningRock>().enabled = true;
     }
+
     public void SpawnMeat()
     {
-        DisableAllRessource();
+        UnactiveScripts();
         spawnRessources.GetComponent<SpawningMeat>().enabled = true;
     }
 
-    private void DisableAllRessource()
+    private void UnactiveScripts()
     {
         spawnRessources.GetComponent<SpawningWood>().enabled = false;
         spawnRessources.GetComponent<SpawningRock>().enabled = false;
         spawnRessources.GetComponent<SpawningMeat>().enabled = false;
+    }
+
+    public void DisableAllRessource()
+    {
+        EnableAll(false);
+        UnactiveScripts();
+        textToChange.text = "Ressources";
+        isActive = false;
+    }
+
+    public void CloseOtherMenu()
+    {
+        _constructionMenu.CloseConstructionMenu();
     }
 }

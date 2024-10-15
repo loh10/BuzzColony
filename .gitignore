@@ -72,3 +72,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 Assets/SaveData.json
 Assets/SaveData.json.meta
+/Assets/TextMesh Pro
+/Assets/TextMesh Pro/Shaders
+/Assets/TextMesh Pro
+Assets/TextMesh Pro/Shaders/TMP_Sprite.shader

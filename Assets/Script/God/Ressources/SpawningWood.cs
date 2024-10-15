@@ -8,7 +8,7 @@ public class SpawningWood : MonoBehaviour
     private GameObject wood;
     public Tilemap tilemap;
     private Spawning _spawning = new Spawning();
-    private bool _canBuild ;
+    private bool _canBuild;
     private Vector3 _posToBuild;
 
     void Update()
@@ -18,7 +18,7 @@ public class SpawningWood : MonoBehaviour
             _posToBuild = _spawning.SpawnPosition(tilemap, out _canBuild);
             if (_canBuild)
             {
-                wood = Instantiate(woodPrefab, _posToBuild, Quaternion.identity);  
+                wood = Instantiate(woodPrefab, _posToBuild, Quaternion.identity);
                 wood.transform.SetParent(woodParent.transform);
                 _canBuild = false;
             }
