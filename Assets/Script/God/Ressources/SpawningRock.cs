@@ -12,7 +12,22 @@ public class SpawningRock : MonoBehaviour
     private Spawning _spawning = new Spawning();
     private bool _canBuild;
     private Vector3 _posToBuild;
+    private int index;
 
+    private void Start()
+    {
+        if (SaveAndLoad.Instance!=null)
+        {
+            index = SaveAndLoad.Instance._nbConstruction;
+            for (int i = 0; i < index; i++)
+            {
+                rock = Instantiate(rockPrefab, _spawning.StringToVector2(SaveAndLoad.Instance._rock["Rock" + i]), Quaternion.identity);
+                rock.transform.SetParent(rockParent.transform);
+                rock.name = "Rock" + i;
+            }
+        }
+    }
+    
     void Update()
     {
         if (Input.GetMouseButton(0))
@@ -22,6 +37,7 @@ public class SpawningRock : MonoBehaviour
             {
                 rock = Instantiate(rockPrefab, _posToBuild, Quaternion.identity);
                 rock.transform.SetParent(rockParent.transform);
+                rock.name = "Rock" + index;
                 _canBuild = false;
             }
         }

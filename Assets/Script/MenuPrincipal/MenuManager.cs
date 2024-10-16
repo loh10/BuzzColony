@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 
     public void Play()
     {
+        SaveAndLoad.Instance.DeleteSaveFile();
         SaveAndLoad.Instance.SaveMap(seed);
         SaveAndLoad.Instance.SaveGame();
         SceneManager.LoadScene(1);
