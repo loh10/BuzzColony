@@ -78,9 +78,12 @@ public class SpawningRessources : MonoBehaviour
                     _ressourceCreate.name = _actualRessource.name + index;
                     _canBuild = false;
                     ressourceList.Add(_actualRessource.name + index, _posToBuild.ToString());
-                    SaveAndLoad.Instance.SaveRessource(ressourceList, index);
-                    SaveAndLoad.Instance.SaveGame();
                     index++;
+                    if (SaveAndLoad.Instance)
+                    {
+                        SaveAndLoad.Instance.SaveRessource(ressourceList, index);
+                        SaveAndLoad.Instance.SaveGame();
+                    }
                 }
             }
         }
