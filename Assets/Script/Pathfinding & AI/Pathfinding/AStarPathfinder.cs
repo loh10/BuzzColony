@@ -3,18 +3,22 @@ using UnityEngine;
 
 public class AStarPathfinder : MonoBehaviour
 {
-    private Grid grid;
+    private GeneratorMap grid;
 
     private void Start()
     {
-        grid = FindObjectOfType<Grid>();
-        grid.InitializeGrid();
+        grid = FindObjectOfType<GeneratorMap>();
     }
 
     public List<Node> FindPath(Vector2Int start, Vector2Int goal)
     {
         Node startNode = grid.Nodes[start.x, start.y];
         Node goalNode = grid.Nodes[goal.x, goal.y];
+
+        if(!goalNode.IsWalkable)
+        {
+            Debug.LogWarning("Goal Node is not walkable");
+        }
 
         List<Node> openList = new List<Node>();
         HashSet<Node> closedList = new HashSet<Node>();

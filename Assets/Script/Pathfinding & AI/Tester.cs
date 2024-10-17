@@ -18,8 +18,10 @@ public class Tester : MonoBehaviour
         {
             int targetX = Random.Range(1, 9);
             int targetY = Random.Range(1, 9);
-            List<Node> path = AStarPathfinder.FindPath(new Vector2Int(0, 0), new Vector2Int(targetX, targetY));
-            TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources", new Dictionary<string, int> { { "Wood", 10 } });
+            //List<Node> path = AStarPathfinder.FindPath(new Vector2Int(0, 0), new Vector2Int(0, 158));
+            List<Node> path = AStarPathfinder.FindPath(new Vector2Int(0, 0), new Vector2Int(Random.Range(1, 200), Random.Range(1, 200)));
+            print(targetX + "" + targetY);
+            //TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources", new Dictionary<string, int> { { "Wood", 10 } });
 
         }
     }
