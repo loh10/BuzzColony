@@ -4,8 +4,7 @@ using UnityEngine;
 public class Tester : MonoBehaviour
 {
     public Agent agent;
-    //public AStarPathfinder AStarPathfinder;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public AStarPathfinder AStarPathfinder;
 
     void Start()
     {
@@ -17,10 +16,9 @@ public class Tester : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //print("HEY");
-            //int targetX = Random.Range(1, 9);
-            //int targetY = Random.Range(1, 9);
-            //List<Node> path = AStarPathfinder.FindPath(new Vector2Int(0, 0), new Vector2Int(targetX, targetY));
+            int targetX = Random.Range(1, 9);
+            int targetY = Random.Range(1, 9);
+            List<Node> path = AStarPathfinder.FindPath(new Vector2Int(0, 0), new Vector2Int(targetX, targetY));
             TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources", new Dictionary<string, int> { { "Wood", 10 } });
 
         }
