@@ -28,42 +28,15 @@ public class SpawningMenu : MonoBehaviour
 
     public void ButtonAppear()
     {
-        UnactiveScripts();
         CloseOtherMenu();
         isActive = !isActive;
         textToChange.text = isActive ? "X" : "Ressources";
         EnableAll(isActive);
     }
 
-    public void SpawnWood()
-    {
-        UnactiveScripts();
-        spawnRessources.GetComponent<SpawningWood>().enabled = true;
-    }
-
-    public void SpawnRock()
-    {
-        UnactiveScripts();
-        spawnRessources.GetComponent<SpawningRock>().enabled = true;
-    }
-
-    public void SpawnMeat()
-    {
-        UnactiveScripts();
-        spawnRessources.GetComponent<SpawningMeat>().enabled = true;
-    }
-
-    private void UnactiveScripts()
-    {
-        spawnRessources.GetComponent<SpawningWood>().enabled = false;
-        spawnRessources.GetComponent<SpawningRock>().enabled = false;
-        spawnRessources.GetComponent<SpawningMeat>().enabled = false;
-    }
-
     public void DisableAllRessource()
     {
         EnableAll(false);
-        UnactiveScripts();
         textToChange.text = "Ressources";
         isActive = false;
     }

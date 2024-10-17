@@ -61,7 +61,7 @@ public class ConstructionMenu : MonoBehaviour
             {
                 constructionList = SaveAndLoad.Instance._construction;
                 _nbConstruction = SaveAndLoad.Instance._nbConstruction;
-                
+
                 BuildAllBatiment();
             }
         }
@@ -73,16 +73,17 @@ public class ConstructionMenu : MonoBehaviour
         {
             GameObject objectToConstruct = null;
             string objectName;
-            objectName = construction.Key.Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "").Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
+            objectName = construction.Key.Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "")
+                .Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
             print(objectName);
-            if (objectName== "House")
+            if (objectName == "House")
             {
                 objectToConstruct = _habitation;
                 _size = _habitationSize;
                 _tagToAdd = "House";
             }
 
-            if (objectName== "Storage")
+            if (objectName == "Storage")
             {
                 objectToConstruct = _reserve;
                 _size = _reserveSize;

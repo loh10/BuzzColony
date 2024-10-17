@@ -6,12 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/Spawning.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources/Spawning.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMeat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMeat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningRock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningRock.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningWood.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningWood.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/MenuPrincipal/MenuManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/MenuPrincipal/MenuManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMeat.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMeat.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningRock.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningRock.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningWood.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningWood.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
