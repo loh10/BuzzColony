@@ -6,7 +6,8 @@ using UnityEngine.Tilemaps;
 public class GeneratorMap : MonoBehaviour
 {
     #region MapDeatail
-
+    public GameObject nonWalkableNodePrefab;
+    public GameObject WalkableNodePrefab;
     [Header("Mesh Options")] public bool generate;
     public int mapScale = 25;
 
@@ -107,6 +108,15 @@ public class GeneratorMap : MonoBehaviour
         if (colorMountain > mountainRatio)
         {
             tileMapLayer2.SetTile(new Vector3Int(x, z, 0), tileMap2);
+            if (tileMapLayer1.GetTile(new Vector3Int(x, z, 0)))
+            {
+                tileMapLayer1.SetTile(new Vector3Int(x, z, 0), null);
+                Instantiate(WalkableNodePrefab, new Vector3(x, z, 0), Quaternion.identity);
+            }
+        }
+        else
+        {
+            Instantiate(nonWalkableNodePrefab, new Vector3(x, z, 0), Quaternion.identity);
         }
     }
 
