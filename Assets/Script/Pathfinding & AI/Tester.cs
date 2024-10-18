@@ -6,23 +6,20 @@ public class Tester : MonoBehaviour
     public Agent agent;
     public AStarPathfinder AStarPathfinder;
 
-    void Start()
-    {
+    public Vector2Int pathStart;
+    public Vector2Int pathGoal;
+    public bool randomPath;
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            int targetX = Random.Range(1, 9);
-            int targetY = Random.Range(1, 9);
-            //List<Node> path = AStarPathfinder.FindPath(new Vector2Int(0, 0), new Vector2Int(0, 158));
-            List<Node> path = AStarPathfinder.FindPath(new Vector2Int(0, 0), new Vector2Int(Random.Range(1, 200), Random.Range(1, 200)));
+            int targetX = randomPath ? Random.Range(0, 200) : pathGoal.x;
+            int targetY = randomPath ? Random.Range(0, 200) : pathGoal.y;
+
+            List<Node> path = AStarPathfinder.FindPath(new Vector2Int(100, 100), new Vector2Int(targetX, targetY));
             print(targetX + "" + targetY);
             //TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources", new Dictionary<string, int> { { "Wood", 10 } });
-
         }
     }
 }
