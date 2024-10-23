@@ -19,9 +19,8 @@ public class GameData
     public int NBRESSOURCE;
     
     //Messages
-    public string MESSAGECONTENT;
-    public string MESSAGEBTNEXISTENCE;
-    public string MESSAGEBTNTEXT;
+    public string COLONNAME;
+    public string COLONPOSITION;
 }
 
 public class SaveAndLoad : MonoBehaviour
@@ -42,7 +41,7 @@ public class SaveAndLoad : MonoBehaviour
     public int _nbRessource;
 
     //Messages
-    public List<Message> _message;
+    public Dictionary<int,string> _colon;
     
     private void Awake()
     {
@@ -57,6 +56,7 @@ public class SaveAndLoad : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        LoadGame();
     }
 
     public void SaveMap(int seed)
@@ -74,9 +74,10 @@ public class SaveAndLoad : MonoBehaviour
         _ressource = ressource;
         _nbRessource = nbRessource;
     }
-    public void SaveMessage(List<Message> message)
+    public void SaveColon(int index, string position)
     {
-        _message = new List<Message>();
+        _gameData.COLONNAME += index + ",";
+        _gameData.COLONPOSITION += position + ";";
     }
 
     
@@ -108,18 +109,15 @@ public class SaveAndLoad : MonoBehaviour
             }
             _gameData.NBRESSOURCE = _nbRessource;
         }
-        
-        //Messages
-        if (_message != null)
+        //Colon
+        if (_colon != null)
         {
-            _gameData.MESSAGECONTENT = "";
-            _gameData.MESSAGEBTNTEXT = "";
-            _gameData.MESSAGEBTNEXISTENCE = "";
-            foreach (Message message in _message)
+            _gameData.COLONNAME = "";
+            _gameData.COLONPOSITION = "";
+            foreach (int index in _colon.Keys)
             {
-                _gameData.MESSAGECONTENT += message.content + ";";
-                _gameData.MESSAGEBTNEXISTENCE += message.haveBtn + ";";
-                _gameData.MESSAGEBTNTEXT += message.btnText + ";";
+                _gameData.COLONNAME += index + ",";
+                _gameData.COLONPOSITION += _colon[index] + ";";
             }
         }
     }
@@ -142,7 +140,7 @@ public class SaveAndLoad : MonoBehaviour
             _nbConstruction = _gameData.NBCONSTRUCTION;
             SetRessource();
             _nbRessource = _gameData.NBCONSTRUCTION;
-            SetMessage();
+            SetColon();
         }
     }
 
@@ -167,15 +165,14 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
     
-    private void SetMessage()
+    private void SetColon()
     {
-        string[] message = _gameData.MESSAGECONTENT.Split(";");
-        string[] haveBtn = _gameData.MESSAGEBTNEXISTENCE.Split(";");
-        string[] txtBtn = _gameData.MESSAGEBTNTEXT.Split(";");
-        _message = new List<Message>();
-        for (int i = 0; i < message.Length - 1; i++)
+        string[] colonName = _gameData.COLONNAME.Split(",");
+        string[] colonPosition = _gameData.COLONPOSITION.Split(";");
+        _colon = new Dictionary<int, string>();
+        for (int i = 0; i < colonName.Length - 1; i++)
         {
-            _message.Add(new Message(message[i], Convert.ToBoolean(haveBtn[i]), txtBtn[i])); 
+            _colon.Add(int.Parse(colonName[i]), colonPosition[i]);
         }
     }
     

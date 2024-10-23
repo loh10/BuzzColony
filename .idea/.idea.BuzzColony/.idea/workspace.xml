@@ -6,11 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ressource/meat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/meat.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Animals/MovementAnimals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Animals/MovementAnimals.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Camera/CameraMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Camera/CameraMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Colon/Colon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Colon/Colon.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Colon/ColonManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Colon/ColonManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Message/MessageBtn.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Message/MessageBtn.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/Message/MessageManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Message/MessageManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,6 +44,7 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;05af00ff&quot;,
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="2nF1d7sXTIy5aYkFln1DY2pfCl3" />
@@ -59,7 +60,7 @@
     &quot;Attach to Unity Editor.Attach to Unity Editor &amp; Play.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Standalone Player.Start Unity.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;IA__Animal&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -135,7 +136,8 @@
       <workItem from="1729236609254" duration="21638000" />
       <workItem from="1729510983024" duration="11973000" />
       <workItem from="1729582549749" duration="24924000" />
-      <workItem from="1729668666630" duration="2817000" />
+      <workItem from="1729668666630" duration="11139000" />
+      <workItem from="1729683533803" duration="299000" />
     </task>
     <servers />
   </component>

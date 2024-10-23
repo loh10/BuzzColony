@@ -25,8 +25,13 @@ public class MessageBtn : MonoBehaviour
             RessourceAct.Instance.AddRessource(-allChildren[index].nbRessources, allChildren[index].nameRessource);
             allChildren[index].isMine = true;
             allChildren[index].transform.parent = GameObject.Find("ColonMine").transform;
+            if (SaveAndLoad.Instance)
+            {
+                SaveAndLoad.Instance.SaveColon(index, allChildren[index].transform.position.ToString());
+                SaveAndLoad.Instance.SaveGame();
+            }
             Destroy(gameObject.transform.parent.gameObject);
-        }
+        } 
     }
 
 

@@ -14,27 +14,7 @@ public class MessageManager : MonoBehaviour
     private Message _message;
     public GameObject messageParent, messagePrefab;
 
-    private void OnEnable()
-    {
-        if (SaveAndLoad.Instance)
-        {
-            SaveAndLoad.Instance.LoadGame();
-            if (SaveAndLoad.Instance._message.Count > 0)
-            {
-                message = SaveAndLoad.Instance._message;
-            }
-        }
-    }
-
-    private void UpdateMessageSave()
-    {
-        if (SaveAndLoad.Instance)
-        {
-            SaveAndLoad.Instance.SaveMessage(message);
-            SaveAndLoad.Instance.SaveGame();
-        }
-    }
-
+    
     public void AddMessage(Message messageToAdd)
     {
         if (message.Count == 4)
@@ -69,6 +49,5 @@ public class MessageManager : MonoBehaviour
         }
 
         message.Add(messageToAdd);
-        UpdateMessageSave();
     }
 }

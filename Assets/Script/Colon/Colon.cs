@@ -63,18 +63,18 @@ public class Colon : MonoBehaviour
         if (_constructionTarget)
         {
             Vector2 targetPosition = _constructionTarget.transform.position;
-            Vector2 currentPosition = transform.position;
+            Vector2 currentPosition = transform.position; 
             Vector2 direction = (targetPosition - currentPosition).normalized;
 
             if (Vector2.Distance(currentPosition, targetPosition) > 3f)
             {
                 transform.Translate(direction * (speed * Time.deltaTime));
             }
-        }
-        if(Vector2.Distance(transform.position, _constructionTarget.transform.position) < 3f && !notAsk)
-        {
-            ChooseRessourceToAsk();
-            notAsk = true;
+            if(Vector2.Distance(transform.position, _constructionTarget.transform.position) < 3f && !notAsk)
+            {
+                ChooseRessourceToAsk();
+                notAsk = true;
+            }
         }
     }
 
