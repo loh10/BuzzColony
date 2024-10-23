@@ -1,79 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using Random = UnityEngine.Random;
-
-public enum Direction
-{
-    Up,
-    Down,
-    Left,
-    Right,
-    None
-}
 
 public class MovementAnimals : MonoBehaviour
 {
-    private Direction _direction = Direction.None;
-    private int speed = 8;
+    public float speed = 1.5f;
+    public float changeDirectionInterval = 3f;
+    private Vector2 _targetDirection;
+    private float _timeSinceLastChange;
 
     private void Start()
     {
-        print("j'existe");
-        StartCoroutine(Move());
+        ChooseRandomDirection();
     }
 
-    IEnumerator Move()
+    private void Update()
     {
-        CheckDirection();
-        print("je me dirige");
-        yield return new WaitForSeconds(5);
-        StartCoroutine(Move());
-    }
-
-    private Direction ChooseDirection()
-    {
-        int random = Random.Range(0, 4);
-        _direction = (Direction)random;
-        print("je vais vers le " + _direction);
-        return _direction;
-    }
-
-    private void CheckDirection()
-    {
-        Vector3 target = new Vector3();
-        switch (ChooseDirection())
+        MoveAnimal();
+        _timeSinceLastChange += Time.deltaTime;
+        if (_timeSinceLastChange >= changeDirectionInterval)
         {
-            case Direction.Down:
-                target = Vector3.down;
-                break;
-            case Direction.Up:
-                target = Vector3.up ;
-                break;
-            case Direction.Left:
-                target = Vector3.left;
-                break;
-            case Direction.Right:
-                target = Vector3.right ;
-                break;
-            default:
-                print("wahou");
-                break;
+            ChooseRandomDirection();
+            _timeSinceLastChange = 0f;
         }
-        print("ma cible est " + target);
-        if (Physics.Raycast(transform.position, target, out RaycastHit hit, float.PositiveInfinity))
-        {
-            if (Vector2.Distance(transform.position, hit.transform.position) < 15 &&
-                Vector2.Distance(transform.position, hit.transform.position) >= 2)
-            {
-                GetComponent<NavMeshAgent>().SetDestination(hit.transform.position);
-            }
-            else
-            {
-                print("il n y a rien pour moi ici   ");
-            }
-        }
+    }
+
+    private void MoveAnimal()
+    {
+        transform.Translate(_targetDirection * (speed * Time.deltaTime));
+    }
+
+    private void ChooseRandomDirection()
+    {
+        float angle = Random.Range(0f, 360f);
+        _targetDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
     }
 }

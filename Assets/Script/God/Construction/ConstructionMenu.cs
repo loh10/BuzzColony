@@ -75,7 +75,6 @@ public class ConstructionMenu : MonoBehaviour
             string objectName;
             objectName = construction.Key.Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "")
                 .Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
-            print(objectName);
             if (objectName == "House")
             {
                 objectToConstruct = _habitation;
@@ -127,8 +126,11 @@ public class ConstructionMenu : MonoBehaviour
                     constructionList.Add(_tagToAdd + _nbConstruction, constructionPosition.ToString());
                     _currentConstruction = null;
                     _nbConstruction++;
-                    SaveAndLoad.Instance.SaveConstruction(constructionList, _nbConstruction);
-                    SaveAndLoad.Instance.SaveGame();
+                    if (SaveAndLoad.Instance)
+                    {
+                        SaveAndLoad.Instance.SaveConstruction(constructionList, _nbConstruction);
+                        SaveAndLoad.Instance.SaveGame();
+                    }
                 }
             }
         }
@@ -138,7 +140,6 @@ public class ConstructionMenu : MonoBehaviour
     {
         value = value.Replace("(", "").Replace(")", "");
         string[] vector = value.Split(',');
-        print(vector[0] + "   " + vector[1] + "     count : " + vector.Length);
         Vector2 vector2 = new Vector2(float.Parse(vector[0], CultureInfo.InvariantCulture.NumberFormat),
             float.Parse(vector[1], CultureInfo.InvariantCulture.NumberFormat));
         return vector2;
@@ -196,7 +197,6 @@ public class ConstructionMenu : MonoBehaviour
 
     public void Habitation()
     {
-        Debug.Log("Habitation");
         Vector3 mousePosition = Input.mousePosition;
         if (Camera.main != null)
         {
@@ -210,7 +210,6 @@ public class ConstructionMenu : MonoBehaviour
 
     public void Reserve()
     {
-        Debug.Log("Reserve");
         Vector3 mousePosition = Input.mousePosition;
         if (Camera.main != null)
         {
@@ -224,7 +223,6 @@ public class ConstructionMenu : MonoBehaviour
 
     public void Champs()
     {
-        Debug.Log("Field");
         Vector3 mousePosition = Input.mousePosition;
         if (Camera.main != null)
         {
@@ -238,7 +236,6 @@ public class ConstructionMenu : MonoBehaviour
 
     public void ZoneAtterissage()
     {
-        Debug.Log("LandingZone");
         Vector3 mousePosition = Input.mousePosition;
         if (Camera.main != null)
         {

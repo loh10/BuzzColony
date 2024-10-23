@@ -17,7 +17,13 @@ public class GameData
     public string RESSOURCENAME;
     public string RESSOURCEPOSITION;
     public int NBRESSOURCE;
+    
+    //Messages
+    public string MESSAGECONTENT;
+    public string MESSAGEBTNEXISTENCE;
+    public string MESSAGEBTNTEXT;
 }
+
 public class SaveAndLoad : MonoBehaviour
 {
     public static SaveAndLoad Instance;
@@ -35,6 +41,9 @@ public class SaveAndLoad : MonoBehaviour
     public Dictionary<string, string> _ressource;
     public int _nbRessource;
 
+    //Messages
+    public List<Message> _message;
+    
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -64,6 +73,10 @@ public class SaveAndLoad : MonoBehaviour
     {
         _ressource = ressource;
         _nbRessource = nbRessource;
+    }
+    public void SaveMessage(List<Message> message)
+    {
+        _message = new List<Message>();
     }
 
     
@@ -95,6 +108,20 @@ public class SaveAndLoad : MonoBehaviour
             }
             _gameData.NBRESSOURCE = _nbRessource;
         }
+        
+        //Messages
+        if (_message != null)
+        {
+            _gameData.MESSAGECONTENT = "";
+            _gameData.MESSAGEBTNTEXT = "";
+            _gameData.MESSAGEBTNEXISTENCE = "";
+            foreach (Message message in _message)
+            {
+                _gameData.MESSAGECONTENT += message.content + ";";
+                _gameData.MESSAGEBTNEXISTENCE += message.haveBtn + ";";
+                _gameData.MESSAGEBTNTEXT += message.btnText + ";";
+            }
+        }
     }
 
     public void SaveGame()
@@ -115,6 +142,7 @@ public class SaveAndLoad : MonoBehaviour
             _nbConstruction = _gameData.NBCONSTRUCTION;
             SetRessource();
             _nbRessource = _gameData.NBCONSTRUCTION;
+            SetMessage();
         }
     }
 
@@ -138,7 +166,19 @@ public class SaveAndLoad : MonoBehaviour
             _ressource.Add(nameConstruction[i], positionConstruction[i]);
         }
     }
-
+    
+    private void SetMessage()
+    {
+        string[] message = _gameData.MESSAGECONTENT.Split(";");
+        string[] haveBtn = _gameData.MESSAGEBTNEXISTENCE.Split(";");
+        string[] txtBtn = _gameData.MESSAGEBTNTEXT.Split(";");
+        _message = new List<Message>();
+        for (int i = 0; i < message.Length - 1; i++)
+        {
+            _message.Add(new Message(message[i], Convert.ToBoolean(haveBtn[i]), txtBtn[i])); 
+        }
+    }
+    
     public void DeleteSaveFile()
     {
         if (File.Exists(_saveFilePath))

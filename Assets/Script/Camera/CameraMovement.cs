@@ -43,33 +43,6 @@ public class CameraMovement : MonoBehaviour
         MoveCamera(move);
     }
 
-    private void CameraEdgeScroll()
-    {
-        Vector3 move = Vector3.zero;
-
-        if (Input.mousePosition.x >= Screen.width - edgeDist)
-        {
-            move.x += speed * Time.deltaTime;
-        }
-
-        if (Input.mousePosition.x <= edgeDist)
-        {
-            move.x -= speed * Time.deltaTime;
-        }
-
-        if (Input.mousePosition.y >= Screen.height - edgeDist)
-        {
-            move.y += speed * Time.deltaTime;
-        }
-
-        if (Input.mousePosition.y <= edgeDist)
-        {
-            move.y -= speed * Time.deltaTime;
-        }
-
-        MoveCamera(move);
-    }
-
     private void MoveCamera(Vector3 move)
     {
         Vector3 newPosition = transform.position + move;
@@ -93,7 +66,6 @@ public class CameraMovement : MonoBehaviour
 
     private void Update()
     {
-        CameraEdgeScroll();
         CameraKeyboardMove();
         CameraMouseDragMove();
         ZoomCamera();
