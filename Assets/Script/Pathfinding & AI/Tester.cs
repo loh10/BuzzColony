@@ -17,9 +17,8 @@ public class Tester : MonoBehaviour
             int targetX = randomPath ? Random.Range(0, 200) : pathGoal.x;
             int targetY = randomPath ? Random.Range(0, 200) : pathGoal.y;
 
-            List<Node> path = AStarPathfinder.FindPath(new Vector2Int(100, 100), new Vector2Int(targetX, targetY));
-            print(targetX + "" + targetY);
-            //TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources", new Dictionary<string, int> { { "Wood", 10 } });
+            //List<Node> path = AStarPathfinder.FindPath(new Vector2Int(100, 100), new Vector2Int(targetX, targetY));
+            TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources", new Dictionary<string, int> { { "Wood", 10 } });
         }
     }
 }

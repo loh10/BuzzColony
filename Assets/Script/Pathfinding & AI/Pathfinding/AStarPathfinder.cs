@@ -5,9 +5,12 @@ public class AStarPathfinder : MonoBehaviour
 {
     private GeneratorMap grid;
 
+    public Agent agent;
+
     private void Start()
     {
         grid = FindObjectOfType<GeneratorMap>();
+        agent = FindObjectOfType<Agent>();
     }
 
     public List<Node> FindPath(Vector2Int start, Vector2Int goal)
@@ -41,7 +44,18 @@ public class AStarPathfinder : MonoBehaviour
 
             if (currentNode == goalNode)
             {
-                return RetracePath(startNode, goalNode);
+                // Path found, retrace it and assign to the agent
+                List<Node> path = RetracePath(startNode, goalNode);
+                if(agent)
+                {
+
+                    agent.SetPath(path);
+                }
+                else
+                {
+                    Debug.LogWarning("Failed to find a agent for the path");
+                }
+                return path;
             }
 
             foreach (Node neighbor in grid.GetNeighbors(currentNode))

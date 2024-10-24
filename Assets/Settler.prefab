@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4880358517675974957}
   - component: {fileID: 7732690704550694792}
+  - component: {fileID: 6906528558876592143}
   m_Layer: 0
   m_Name: Settler
   m_TagString: Untagged
@@ -84,3 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6906528558876592143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140919396553805620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf62489d81d1fd499f22693a5d4257d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWorking: 0
+  target: {fileID: 0}
+  speed: 10

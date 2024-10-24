@@ -11,12 +11,16 @@ public class Agent : MonoBehaviour
     // Simulated resource available for tasks
     private Dictionary<string, int> resourcesAvailable = new Dictionary<string, int>();
     public bool isWorking;
-    public GameObject tree;
+    public GameObject target;
     public float speed;
+
+    private List<Node> currentPath;  // The path to follow
+    private int currentNodeIndex = 0;
+    private AStarPathfinder starPathfinder;
 
     private void Start()
     {
-
+        starPathfinder = GameObject.Find("Pathfinder").GetComponent<AStarPathfinder>();
         // Initialize resources (e.g., wood and stone)
         resourcesAvailable["Wood"] = 0;
         resourcesAvailable["Stone"] = 0;
@@ -29,6 +33,11 @@ public class Agent : MonoBehaviour
     public void AddTask(MyTask task)
     {
         TaskList.Add(task);
+        Debug.Log(task.TaskName);
+        if(task.TaskName == "Collect Resources")
+        {
+
+        }
     }
 
     // Retrieves the next task based on priority
@@ -84,6 +93,17 @@ public class Agent : MonoBehaviour
                             int collectedAmount = resourceRequirement.Value;
 
                             // Add the collected resource to the available resources
+                            
+                            switch (resourceName)
+                            {
+                                case "Wood":
+                                    target = GameObject.Find("Tree temp");
+                                    break;
+                            }
+                            int targetX = (int)target.transform.position.x;
+                            int targetY = (int)target.transform.position.y;
+                            List<Node> path = starPathfinder.FindPath(new Vector2Int((int)transform.position.x, (int)transform.position.y), new Vector2Int(targetX, targetY));
+
                             if (resourcesAvailable.ContainsKey(resourceName))
                             {
                                 resourcesAvailable[resourceName] += collectedAmount;
@@ -122,12 +142,61 @@ public class Agent : MonoBehaviour
         yield return new WaitForSeconds(2.0f); ; // default value
     }
 
+    //private void Update()
+    //{
+    //    if (isWorking)
+    //    {
+    //        float step = speed * Time.deltaTime;
+    //        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+    //    }
+    //}
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    ///
     private void Update()
     {
-        if (isWorking)
+        // If the agent is currently moving along a path, move towards the next node
+        if (isWorking && currentPath != null && currentNodeIndex < currentPath.Count)
         {
-            float step = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, tree.transform.position, step);
+            
+            MoveAlongPath();
+        }
+    }
+
+    // Start moving along the path
+    public void SetPath(List<Node> path)
+    {
+        if (path == null || path.Count == 0)
+        {
+            Debug.LogWarning("Path is invalid or empty.");
+            return;
+        }
+
+        currentPath = path;
+        currentNodeIndex = 0;
+        isWorking = true;
+    }
+
+    // Move the agent towards the next node in the path
+    private void MoveAlongPath()
+    {
+        if (currentNodeIndex >= currentPath.Count)
+        {
+            // Finished the path
+            isWorking = false;
+            return;
+        }
+
+        Node targetNode = currentPath[currentNodeIndex];
+        Vector3 targetPosition = new Vector3(targetNode.Position.x, targetNode.Position.y, transform.position.z);
+
+        // Move the agent towards the target node
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+
+        // Check if the agent reached the target node, move to the next node
+        if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        {
+            currentNodeIndex++;
         }
     }
 }
