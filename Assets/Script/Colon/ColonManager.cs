@@ -39,19 +39,18 @@ public class ColonManager : MonoBehaviour
             float.Parse(vector[1], CultureInfo.InvariantCulture.NumberFormat));
         return vector2;
     }
+    
     IEnumerator SpawnColon()
     {
         if (constructionParent.childCount > 0 && colonExist.Count < constructionParent.childCount && colonParent.childCount < 4)
         {
-            _firstConstruction = constructionParent.GetChild(0).gameObject;
             Vector2 spawnPosition = new Vector2(0,0);
             GameObject newColon = Instantiate(colonPrefab, spawnPosition, Quaternion.identity);
             colonExist.Add(newColon);
-            newColon.GetComponent<Colon>()._constructionTarget = _firstConstruction;
             newColon.transform.SetParent(colonParent);
+            newColon.GetComponent<Colon>()._constructionTarget = constructionParent.GetChild(constructionParent.childCount-1).gameObject;
         }
         yield return new WaitForSeconds(Random.Range(mintTimer, maxTimer));
         StartCoroutine(SpawnColon());
     }
-        
 }

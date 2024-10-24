@@ -24,9 +24,13 @@ public class SpawningRessources : MonoBehaviour
         if (SaveAndLoad.Instance != null)
         {
             index = SaveAndLoad.Instance._nbRessource;
-            ressourceList = SaveAndLoad.Instance._ressource;
+            
+            if (index > 0)
+            {
+                ressourceList = SaveAndLoad.Instance._ressource;
+                PlaceAllRessource();
+            }
             index++;
-            PlaceAllRessource();
         }
     }
 

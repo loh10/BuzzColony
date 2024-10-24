@@ -45,18 +45,18 @@ public class SaveAndLoad : MonoBehaviour
     
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         if (Instance == null)
         {
             Instance = this;
             _gameData = new GameData();
             _saveFilePath = Application.dataPath + "/SaveData.json";
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-        LoadGame();
+        //LoadGame();
     }
 
     public void SaveMap(int seed)
@@ -133,6 +133,7 @@ public class SaveAndLoad : MonoBehaviour
     {
         if (File.Exists(_saveFilePath))
         {
+            print("file exist");
             string loadPlayerData = File.ReadAllText(_saveFilePath);
             _gameData = JsonUtility.FromJson<GameData>(loadPlayerData);
             _seed = _gameData.SEED;
@@ -146,6 +147,7 @@ public class SaveAndLoad : MonoBehaviour
 
     private void SetConstruction()
     {
+        print("file saved here " + File.ReadAllText(_saveFilePath));
         string[] nameConstruction = _gameData.CONSTRUCTIONNAME.Split(",");
         string[] positionConstruction = _gameData.CONSTRUCTIONPOSITION.Split(";");
         _construction = new Dictionary<string, string>();
@@ -156,6 +158,7 @@ public class SaveAndLoad : MonoBehaviour
     }
     private void SetRessource()
     {
+        print("file saved here " + File.ReadAllText(_saveFilePath));
         string[] nameConstruction = _gameData.RESSOURCENAME.Split(",");
         string[] positionConstruction = _gameData.RESSOURCEPOSITION.Split(";");
         _ressource = new Dictionary<string, string>();
@@ -167,6 +170,7 @@ public class SaveAndLoad : MonoBehaviour
     
     private void SetColon()
     {
+        print("file saved here " + File.ReadAllText(_saveFilePath));
         string[] colonName = _gameData.COLONNAME.Split(",");
         string[] colonPosition = _gameData.COLONPOSITION.Split(";");
         _colon = new Dictionary<int, string>();
@@ -181,6 +185,7 @@ public class SaveAndLoad : MonoBehaviour
         if (File.Exists(_saveFilePath))
         {
             File.Delete(_saveFilePath);
+            print($"file was deleted  here {_saveFilePath}");
         }
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class MovementAnimals : MonoBehaviour
 {
@@ -32,5 +34,10 @@ public class MovementAnimals : MonoBehaviour
     {
         float angle = Random.Range(0f, 360f);
         _targetDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        _timeSinceLastChange += changeDirectionInterval;
     }
 }
