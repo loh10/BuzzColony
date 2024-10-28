@@ -18,6 +18,14 @@ public class Agent : MonoBehaviour
     private int currentNodeIndex = 0;
     private AStarPathfinder starPathfinder;
 
+    public enum agentTask
+    {
+        collectWood,
+        fightEnemy,
+    }
+
+    public agentTask[] tasks;
+
     private void Start()
     {
         starPathfinder = GameObject.Find("Pathfinder").GetComponent<AStarPathfinder>();
@@ -26,31 +34,30 @@ public class Agent : MonoBehaviour
         resourcesAvailable["Stone"] = 0;
 
         // Start the task execution routine
-        StartCoroutine(PerformTaskRoutine());
+        //StartCoroutine(PerformTaskRoutine());
     }
 
     // Adds a task to the agent's task list
     public void AddTask(MyTask task)
     {
         TaskList.Add(task);
-        Debug.Log(task.TaskName);
         if(task.TaskName == "Collect Resources")
         {
+            Debug.Log(this.gameObject.name + " is going to " + task.TaskName);
 
         }
+
+        StartCoroutine(PerformTaskRoutine());
     }
 
     // Retrieves the next task based on priority
     public MyTask GetNextTask()
     {
-        // Sort the task list by priority and return the highest priority task
         return TaskList.Count > 0 ? TaskList[0] : null;
     }
 
-    // Checks if the task's dependencies are met before execution
     public bool AreDependenciesMet(MyTask task)
     {
-        // Iterate through the dynamic parameters to see if resource requirements are met
         foreach (var resourceRequirement in task.DynamicParameters)
         {
             string resourceName = resourceRequirement.Key;
@@ -76,12 +83,12 @@ public class Agent : MonoBehaviour
 
             if (currentTask != null)
             {
+                //print("Task name : " + currentTask.TaskName + "  Task priority : " + currentTask.Priority);
+                print(TaskList[0].TaskName);
                 if (AreDependenciesMet(currentTask))
                 {
                     isWorking = true;
-                    Debug.Log("Performing task: " + currentTask.TaskName);
 
-                    // Execute the task
                     yield return StartCoroutine(ExecuteTask(currentTask));
 
                     // Handle specific task results (like resource collection)
@@ -113,16 +120,14 @@ public class Agent : MonoBehaviour
                                 resourcesAvailable[resourceName] = collectedAmount;
                             }
                             //Test
-                            Debug.Log($"Collected {collectedAmount} units of {resourceName}. Available: {resourcesAvailable[resourceName]}");
+                            //Debug.Log($"Collected {collectedAmount} units of {resourceName}. Available: {resourcesAvailable[resourceName]}");
                         }
                     }
 
-                    // Remove completed task from the list
                     TaskList.Remove(currentTask);
                 }
                 else
                 {
-                    // Handle unmet dependencies (you could assign new tasks here)
                     Debug.Log($"Cannot perform task '{currentTask.TaskName}' yet. Dependencies not met.");
                 }
             }
@@ -131,7 +136,6 @@ public class Agent : MonoBehaviour
         }
     }
 
-    // Simulates the execution of a task
     IEnumerator ExecuteTask(MyTask task, float duration)
     {
         yield return new WaitForSeconds(duration);
@@ -141,18 +145,7 @@ public class Agent : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f); ; // default value
     }
-
-    //private void Update()
-    //{
-    //    if (isWorking)
-    //    {
-    //        float step = speed * Time.deltaTime;
-    //        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
-    //    }
-    //}
-
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    ///
+    
     private void Update()
     {
         // If the agent is currently moving along a path, move towards the next node
@@ -190,10 +183,8 @@ public class Agent : MonoBehaviour
         Node targetNode = currentPath[currentNodeIndex];
         Vector3 targetPosition = new Vector3(targetNode.Position.x, targetNode.Position.y, transform.position.z);
 
-        // Move the agent towards the target node
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-        // Check if the agent reached the target node, move to the next node
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             currentNodeIndex++;
