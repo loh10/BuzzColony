@@ -17,6 +17,7 @@ public class Node : MonoBehaviour
     public Node Parent { get; set; }
 
     // Properties to get values without setters
+    
     public Vector2Int Position => position; // Only a getter to expose position
     public bool IsWalkable => isWalkable; // Only a getter to expose IsWalkable
     public int GCost
