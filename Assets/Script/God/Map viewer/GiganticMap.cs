@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class GiganticMap : MonoBehaviour
 {
-    bool isMapViewer;
+    private bool isMapViewer = true;
     [SerializeField]private GameObject mapViewer,squareVisualizer;
     
 
     private void Start()
     {
-        mapViewer.SetActive(isMapViewer);
+        mapViewer.SetActive(false);
     }
 
     public void MapViewer()

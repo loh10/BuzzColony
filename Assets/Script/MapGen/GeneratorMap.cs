@@ -46,7 +46,7 @@ public class GeneratorMap : MonoBehaviour
         ClearTileMaps();
         if (SaveAndLoad.Instance != null)
         {
-            //SaveAndLoad.Instance.LoadGame();
+            SaveAndLoad.Instance.LoadGame();
             seed = SaveAndLoad.Instance._seed;
         }
 

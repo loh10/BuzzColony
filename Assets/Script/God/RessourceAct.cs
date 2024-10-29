@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum Ressource
@@ -15,7 +16,14 @@ public class RessourceAct : MonoBehaviour
     public int nbWood;
     public int nbStone;
     public int nbFood;
+    public int nbClick;
     public static RessourceAct Instance;
+    public TextMeshProUGUI woodText;
+    public TextMeshProUGUI stoneText;
+    public TextMeshProUGUI foodText;
+    public TextMeshProUGUI clickText;
+    public int maxRessource;
+    public Transform reserveParent;
 
     private void Awake()
     {
@@ -27,13 +35,20 @@ public class RessourceAct : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        UpdateText();
     }
 
-    public RessourceAct(int nbWood, int nbStone, int nbFood)
+    private void Start()
     {
-        this.nbWood = nbWood;
-        this.nbStone = nbStone;
-        this.nbFood = nbFood;
+        if (SaveAndLoad.Instance)
+        {
+            nbWood = SaveAndLoad.Instance.nbWood;
+            nbStone = SaveAndLoad.Instance.nbStone;
+            nbFood = SaveAndLoad.Instance.nbFood;
+            nbClick = SaveAndLoad.Instance.nbClick;
+            print(SaveAndLoad.Instance.nbWood);
+        }   
+        UpdateText();
     }
     
     public int GetWood()
@@ -50,7 +65,19 @@ public class RessourceAct : MonoBehaviour
     {
         return nbFood;
     }
+
+    public int GetClick()
+    {
+        return nbClick;
+    }
     
+    public void UseClick()
+    {
+        nbClick--;
+        SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood,nbClick);
+        SaveAndLoad.Instance.SaveGame();
+        UpdateText();
+    }
     public void AddRessource(int nbToAdd, Ressource nameToAdd)
     {
         switch (nameToAdd)
@@ -65,5 +92,22 @@ public class RessourceAct : MonoBehaviour
                 nbStone += nbToAdd;
                 break;
         }
+        SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood,nbClick);
+        SaveAndLoad.Instance.SaveGame();
+        UpdateText();
+    }
+
+    private void UpdateText()
+    {
+        maxRessource = SetMaxRessource();
+        woodText.text = $"{nbWood}/{maxRessource}";
+        stoneText.text = $"{nbStone}/{maxRessource}";
+        foodText.text = $"{nbFood}/{maxRessource}";
+        clickText.text = $"{nbClick}/{maxRessource/3}";
+    }
+    
+    private int SetMaxRessource()
+    {   
+        return reserveParent.childCount*10+30;
     }
 }

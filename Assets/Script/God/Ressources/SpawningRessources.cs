@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +17,7 @@ public class SpawningRessources : MonoBehaviour
     private int index;
     public Dictionary<string, string> ressourceList = new Dictionary<string, string>();
     private string _tagToAdd;
-
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         if (SaveAndLoad.Instance != null)
@@ -42,7 +41,6 @@ public class SpawningRessources : MonoBehaviour
             string objectName;
             objectName = ressource.Key.Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "")
                 .Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
-            print(objectName);
             if (objectName == "Wood")
             {
                 objectToConstruct = _wood;
@@ -72,7 +70,7 @@ public class SpawningRessources : MonoBehaviour
     {
         if (_actualRessource)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0) && RessourceAct.Instance.GetClick() > 0)
             {
                 _posToBuild = _spawning.SpawnPosition(tilemap, out _canBuild);
                 if (_canBuild)
@@ -88,6 +86,7 @@ public class SpawningRessources : MonoBehaviour
                         SaveAndLoad.Instance.SaveRessource(ressourceList, index);
                         SaveAndLoad.Instance.SaveGame();
                     }
+                    RessourceAct.Instance.UseClick();
                 }
             }
         }

@@ -1,9 +1,11 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 using System.Globalization;
+
 
 public class ConstructionMenu : MonoBehaviour
 {
@@ -21,34 +23,10 @@ public class ConstructionMenu : MonoBehaviour
     private Vector2 _size;
     private string _tagToAdd;
     private int _nbConstruction;
+    [SerializeField] private ConstructionSO _habitation, _reserve, _champs, _zoneAtterissage, _currentConstructionSO;
+    [SerializeField] private Button _habitationButton, _reserveButton, _champsButton, _zoneAtterissageButton;
+    private RessourceAct ressourceActuel;
 
-    #region House
-
-    [SerializeField] private GameObject _habitation;
-    Vector2 _habitationSize = new Vector2(2, 2);
-
-    #endregion
-
-    #region Storage
-
-    [SerializeField] private GameObject _reserve;
-    Vector2 _reserveSize = new Vector2(3, 2);
-
-    #endregion
-
-    #region Field
-
-    [SerializeField] private GameObject _champs;
-    Vector2 _champsSize = new Vector2(3, 3);
-
-    #endregion
-
-    #region LandingZone
-
-    [SerializeField] private GameObject _zoneAtterissage;
-    Vector2 _zoneAtterissageSize = new Vector2(3, 7);
-
-    #endregion
 
     public Dictionary<string, string> constructionList = new Dictionary<string, string>();
 
@@ -77,30 +55,30 @@ public class ConstructionMenu : MonoBehaviour
                 .Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
             if (objectName == "House")
             {
-                objectToConstruct = _habitation;
-                _size = _habitationSize;
-                _tagToAdd = "House";
+                objectToConstruct = _habitation.constructionPrefab;
+                _size = _habitation.constructionSize;
+                _tagToAdd = _habitation.tag;
             }
 
             if (objectName == "Storage")
             {
-                objectToConstruct = _reserve;
-                _size = _reserveSize;
-                _tagToAdd = "Storage";
+                objectToConstruct = _reserve.constructionPrefab;
+                _size = _reserve.constructionSize;
+                _tagToAdd = _reserve.tag;
             }
 
             if (objectName == "Field")
             {
-                objectToConstruct = _champs;
-                _size = _champsSize;
-                _tagToAdd = "Field";
+                objectToConstruct = _champs.constructionPrefab;
+                _size = _champs.constructionSize;
+                _tagToAdd = _champs.tag;
             }
 
             if (objectName == "LandingZone")
             {
-                objectToConstruct = _zoneAtterissage;
-                _size = _zoneAtterissageSize;
-                _tagToAdd = "LandingZone";
+                objectToConstruct = _zoneAtterissage.constructionPrefab;
+                _size = _zoneAtterissage.constructionSize;
+                _tagToAdd = _zoneAtterissage.tag;
             }
 
             _currentConstruction = Instantiate(objectToConstruct, StringToVector2(construction.Value),
@@ -116,34 +94,80 @@ public class ConstructionMenu : MonoBehaviour
         {
             GetCellCenterPosition();
             _currentConstruction.transform.position = cellCenterPosition;
-
             if (Input.GetMouseButtonDown(0))
             {
                 constructionPosition = SpawnPosition(tilemap, out canBuild, _size.x, _size.y);
                 if (canBuild)
                 {
+                     RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[0], Ressource.Bois);
+                     RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[1], Ressource.Roche);
+                     RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[2], Ressource.Nourriture);
                     _currentConstruction.tag = _tagToAdd;
-                    constructionList.Add(_tagToAdd + _nbConstruction, constructionPosition.ToString());
-                    _currentConstruction = null;
-                    _nbConstruction++;
-                    if (SaveAndLoad.Instance)
-                    {
-                        SaveAndLoad.Instance.SaveConstruction(constructionList, _nbConstruction);
-                        SaveAndLoad.Instance.SaveGame();
-                    }
+                    StartCoroutine(BuildConstruction(_currentConstructionSO.constructionTime, _currentConstruction));
                 }
             }
         }
     }
 
-        private Vector2 StringToVector2(string value)
+    private bool CheckRessource(int[] ressourceDemande)
+    {
+        ressourceActuel = RessourceAct.Instance;
+        for (int i = 0; i < ressourceDemande.Length; i++)
         {
-            value = value.Replace("(", "").Replace(")", "");
-            string[] vector = value.Split(',');
-            Vector2 vector2 = new Vector2(float.Parse(vector[0], CultureInfo.InvariantCulture.NumberFormat),
-                float.Parse(vector[1], CultureInfo.InvariantCulture.NumberFormat));
-            return vector2;
+            switch (i)
+            {
+                case 0:
+                    if (ressourceActuel.GetWood() < ressourceDemande[i])
+                        return false;
+                    break;
+
+                case 1:
+                    if (ressourceActuel.GetStone() < ressourceDemande[i])
+                        return false;
+                    break;
+
+                case 2:
+                    if (ressourceActuel.GetFood() < ressourceDemande[i])
+                        return false;
+                    break;
+            }
         }
+
+        return true;
+    }
+
+    private IEnumerator BuildConstruction(float _timeToBuild, GameObject _construction)
+    {
+        SpriteRenderer[] construction = _construction.GetComponentsInChildren<SpriteRenderer>();
+        _currentConstruction = null;
+        _nbConstruction++;
+        constructionList.Add(_tagToAdd + _nbConstruction, constructionPosition.ToString());
+        if (SaveAndLoad.Instance)
+        {
+            SaveAndLoad.Instance.SaveConstruction(constructionList, _nbConstruction);
+            SaveAndLoad.Instance.SaveGame();
+        }
+
+        foreach (var spriteRenderer in construction)
+        {
+            spriteRenderer.color = Color.cyan;
+        }
+
+        yield return new WaitForSeconds(_timeToBuild);
+        foreach (var spriteRenderer in construction)
+        {
+            spriteRenderer.color = Color.white;
+        }
+    }
+
+    private Vector2 StringToVector2(string value)
+    {
+        value = value.Replace("(", "").Replace(")", "");
+        string[] vector = value.Split(',');
+        Vector2 vector2 = new Vector2(float.Parse(vector[0], CultureInfo.InvariantCulture.NumberFormat),
+            float.Parse(vector[1], CultureInfo.InvariantCulture.NumberFormat));
+        return vector2;
+    }
 
     private void GetCellCenterPosition()
     {
@@ -187,6 +211,46 @@ public class ConstructionMenu : MonoBehaviour
         isActive = !isActive;
         _marketMenu.SetActive(isActive);
         _spawningMenu.DisableAllRessource();
+        CheckButton();
+    }
+
+    private void CheckButton()
+    {
+        if (CheckRessource(_habitation.constructionCost))
+        {
+            _habitationButton.interactable = true;
+        }
+        else
+        {
+            _habitationButton.interactable = false;
+        }
+
+        if (CheckRessource(_reserve.constructionCost))
+        {
+            _reserveButton.interactable = true;
+        }
+        else
+        {
+            _reserveButton.interactable = false;
+        }
+
+        if (CheckRessource(_champs.constructionCost))
+        {
+            _champsButton.interactable = true;
+        }
+        else
+        {
+            _champsButton.interactable = false;
+        }
+
+        if (CheckRessource(_zoneAtterissage.constructionCost))
+        {
+            _zoneAtterissageButton.interactable = true;
+        }
+        else
+        {
+            _zoneAtterissageButton.interactable = false;
+        }
     }
 
     public void CloseConstructionMenu()
@@ -195,56 +259,37 @@ public class ConstructionMenu : MonoBehaviour
         _marketMenu.SetActive(isActive);
     }
 
-    public void Habitation()
+    public void SetConstruction(ConstructionSO constructionType)
     {
         Vector3 mousePosition = Input.mousePosition;
         if (Camera.main != null)
         {
             mousePosition.z = Camera.main.nearClipPlane;
             Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            _currentConstruction = Instantiate(_habitation, worldPosition, Quaternion.identity, _constructionParent);
-            _size = _habitationSize;
-            _tagToAdd = "House";
+            _currentConstruction = Instantiate(constructionType.constructionPrefab, worldPosition, Quaternion.identity);
+            _size = constructionType.constructionSize;
+            _tagToAdd = constructionType.tag;
+            SetParent(_currentConstruction, _tagToAdd);
+            _currentConstructionSO = constructionType;
         }
     }
 
-    public void Reserve()
+    private void SetParent(GameObject _construction, string tag)
     {
-        Vector3 mousePosition = Input.mousePosition;
-        if (Camera.main != null)
+        switch (tag)
         {
-            mousePosition.z = Camera.main.nearClipPlane;
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            _currentConstruction = Instantiate(_reserve, worldPosition, Quaternion.identity, _constructionParent);
-            _size = _reserveSize;
-            _tagToAdd = "Storage";
-        }
-    }
-
-    public void Champs()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        if (Camera.main != null)
-        {
-            mousePosition.z = Camera.main.nearClipPlane;
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            _currentConstruction = Instantiate(_champs, worldPosition, Quaternion.identity, _constructionParent);
-            _size = _champsSize;
-            _tagToAdd = "Field";
-        }
-    }
-
-    public void ZoneAtterissage()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        if (Camera.main != null)
-        {
-            mousePosition.z = Camera.main.nearClipPlane;
-            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            _currentConstruction =
-                Instantiate(_zoneAtterissage, worldPosition, Quaternion.identity, _constructionParent);
-            _size = _zoneAtterissageSize;
-            _tagToAdd = "LandingZone";
+            case "House":
+                _construction.transform.SetParent(_constructionParent.GetChild(0));
+                break;
+            case "Storage":
+                _construction.transform.SetParent(_constructionParent.GetChild(1));
+                break;
+            case "Field":
+                _construction.transform.SetParent(_constructionParent.GetChild(2));
+                break;
+            default:
+                _construction.transform.SetParent(_constructionParent);
+                break;
         }
     }
 }
