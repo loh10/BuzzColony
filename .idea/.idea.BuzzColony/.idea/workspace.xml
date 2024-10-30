@@ -6,6 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MinimapTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MinimapTexture.renderTexture" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Colon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Colon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/Field.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/Field.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/LandingZone.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/LandingZone.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/Maison.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/Maison.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/Storage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/Storage.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Rock.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Rock.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Wood.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Wood.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/meat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/meat.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/Main Camera Profile.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/Main Camera Profile.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/RessourceAct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/RessourceAct.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TileMapBuzzColony.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TileMapBuzzColony.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +48,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/Message/Message.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Message/MessageManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.11/Shaders/2D/Sprite-Lit-Default.shader" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMPro_UGUI_Private.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../RAID-2024/RAID-2024/Assets/Scripts/General/SaveLoadJson.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UnityProject/GenproceduralURP/Assets/NewBehaviourScript.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -63,7 +79,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -139,6 +155,7 @@
       <workItem from="1729755266412" duration="19568000" />
       <workItem from="1729843951375" duration="20837000" />
       <workItem from="1730119007477" duration="11914000" />
+      <workItem from="1730289056317" duration="9990000" />
     </task>
     <servers />
   </component>

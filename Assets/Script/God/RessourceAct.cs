@@ -92,8 +92,11 @@ public class RessourceAct : MonoBehaviour
                 nbStone += nbToAdd;
                 break;
         }
-        SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood,nbClick);
-        SaveAndLoad.Instance.SaveGame();
+        if(SaveAndLoad.Instance)
+        {
+            SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood,nbClick);
+            SaveAndLoad.Instance.SaveGame();
+        }
         UpdateText();
     }
 
