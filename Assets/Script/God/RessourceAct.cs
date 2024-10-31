@@ -35,6 +35,7 @@ public class RessourceAct : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
         UpdateText();
     }
 
@@ -46,16 +47,16 @@ public class RessourceAct : MonoBehaviour
             nbStone = SaveAndLoad.Instance.nbStone;
             nbFood = SaveAndLoad.Instance.nbFood;
             nbClick = SaveAndLoad.Instance.nbClick;
-            print(SaveAndLoad.Instance.nbWood);
-        }   
+        }
+
         UpdateText();
     }
-    
+
     public int GetWood()
     {
         return nbWood;
     }
-    
+
     public int GetStone()
     {
         return nbStone;
@@ -70,17 +71,22 @@ public class RessourceAct : MonoBehaviour
     {
         return nbClick;
     }
-    
+
     public void UseClick()
     {
         nbClick--;
-        SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood,nbClick);
-        SaveAndLoad.Instance.SaveGame();
+        if (SaveAndLoad.Instance)
+        {
+            SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood, nbClick);
+            SaveAndLoad.Instance.SaveGame();
+        }
+
         UpdateText();
     }
-    public void AddRessource(int nbToAdd, Ressource nameToAdd)
+
+    public void AddRessource(int nbToAdd, Ressource ressourceToAdd)
     {
-        switch (nameToAdd)
+        switch (ressourceToAdd)
         {
             case Ressource.Nourriture:
                 nbFood += nbToAdd;
@@ -92,11 +98,13 @@ public class RessourceAct : MonoBehaviour
                 nbStone += nbToAdd;
                 break;
         }
-        if(SaveAndLoad.Instance)
+
+        if (SaveAndLoad.Instance)
         {
-            SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood,nbClick);
+            SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood, nbClick);
             SaveAndLoad.Instance.SaveGame();
         }
+
         UpdateText();
     }
 
@@ -106,11 +114,11 @@ public class RessourceAct : MonoBehaviour
         woodText.text = $"{nbWood}/{maxRessource}";
         stoneText.text = $"{nbStone}/{maxRessource}";
         foodText.text = $"{nbFood}/{maxRessource}";
-        clickText.text = $"{nbClick}/{maxRessource/3}";
+        clickText.text = $"{nbClick}/{maxRessource / 3}";
     }
-    
+
     private int SetMaxRessource()
-    {   
-        return reserveParent.childCount*10+30;
+    {
+        return reserveParent.childCount * 10 + 30;
     }
 }

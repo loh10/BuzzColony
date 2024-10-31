@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1841376829487804727}
   m_Layer: 0
   m_Name: maison (8)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5173755255662672747}
   m_Layer: 0
   m_Name: maison (1)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 6500202744821107518}
   m_Layer: 0
   m_Name: maison
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 6468941503839459703}
   m_Layer: 0
   m_Name: maison (3)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 3924530232730249944}
   m_Layer: 0
   m_Name: maison (7)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 1656139723369333770}
   m_Layer: 0
   m_Name: maison (2)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 4049109436828631306}
   m_Layer: 0
   m_Name: maison (5)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 2479511869562141942}
   m_Layer: 0
   m_Name: maison (6)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1102,7 +1102,7 @@ GameObject:
   - component: {fileID: 2768245042556532767}
   m_Layer: 0
   m_Name: maison (4)
-  m_TagString: Wood
+  m_TagString: Field
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

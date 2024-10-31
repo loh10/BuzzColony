@@ -48,6 +48,7 @@ public class DayCycle : MonoBehaviour
             lightComponent.enabled = lightOn;
         }
     }
+
     void CheckHour()
     {
         //night

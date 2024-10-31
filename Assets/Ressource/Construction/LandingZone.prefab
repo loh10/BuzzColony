@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 5173755255662672747}
   m_Layer: 0
   m_Name: maison (1)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 4277946995773763600}
   m_Layer: 0
   m_Name: maison (15)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 6500202744821107518}
   m_Layer: 0
   m_Name: maison
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 7501700212632587663}
   m_Layer: 0
   m_Name: maison (13)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -594,7 +594,7 @@ GameObject:
   - component: {fileID: 6468941503839459703}
   m_Layer: 0
   m_Name: maison (3)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 5957858583931029549}
   m_Layer: 0
   m_Name: maison (19)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -870,7 +870,7 @@ GameObject:
   - component: {fileID: 2878614427970150195}
   m_Layer: 0
   m_Name: maison (17)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1036,7 +1036,7 @@ GameObject:
   - component: {fileID: 1656139723369333770}
   m_Layer: 0
   m_Name: maison (2)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1202,7 +1202,7 @@ GameObject:
   - component: {fileID: 8895111775508998167}
   m_Layer: 0
   m_Name: maison (18)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1368,7 +1368,7 @@ GameObject:
   - component: {fileID: 1636738624939111340}
   m_Layer: 0
   m_Name: maison (9)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1452,7 +1452,7 @@ GameObject:
   - component: {fileID: 3034593044144427789}
   m_Layer: 0
   m_Name: maison (8)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1536,7 +1536,7 @@ GameObject:
   - component: {fileID: 4513413423349241719}
   m_Layer: 0
   m_Name: maison (10)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1620,7 +1620,7 @@ GameObject:
   - component: {fileID: 2928060814924786349}
   m_Layer: 0
   m_Name: maison (20)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1704,7 +1704,7 @@ GameObject:
   - component: {fileID: 5199575317285916407}
   m_Layer: 0
   m_Name: maison (12)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 4049109436828631306}
   m_Layer: 0
   m_Name: maison (5)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1872,7 +1872,7 @@ GameObject:
   - component: {fileID: 1381659471080554905}
   m_Layer: 0
   m_Name: maison (14)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2038,7 +2038,7 @@ GameObject:
   - component: {fileID: 3434929312034197312}
   m_Layer: 0
   m_Name: maison (6)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2122,7 +2122,7 @@ GameObject:
   - component: {fileID: 4592540673592120000}
   m_Layer: 0
   m_Name: maison (7)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2288,7 +2288,7 @@ GameObject:
   - component: {fileID: 5540925178798759494}
   m_Layer: 0
   m_Name: maison (11)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2536,7 +2536,7 @@ GameObject:
   - component: {fileID: 7338266321080087596}
   m_Layer: 0
   m_Name: maison (16)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2620,7 +2620,7 @@ GameObject:
   - component: {fileID: 2768245042556532767}
   m_Layer: 0
   m_Name: maison (4)
-  m_TagString: Wood
+  m_TagString: LandingZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

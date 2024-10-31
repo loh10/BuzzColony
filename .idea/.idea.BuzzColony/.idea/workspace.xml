@@ -6,22 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Material/MapVisualizer.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Material/MapVisualizer.shadergraph" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MinimapTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MinimapTexture.renderTexture" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Colon.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Colon.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Colon.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Colon.prefab.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/Field.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/Field.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/LandingZone.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/LandingZone.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/Maison.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/Maison.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Ressource/Construction/Storage.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Construction/Storage.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Rock.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Rock.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Wood.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Wood.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ressource/meat.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/meat.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/Main Camera Profile.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/Main Camera Profile.asset.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Script/God/RessourceAct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/RessourceAct.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TileMapBuzzColony.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TileMapBuzzColony.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningMenu.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningRessources.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Ressources/SpawningRessources.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Script/MapGen/GeneratorMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/MapGen/GeneratorMap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/Renderer2D.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Renderer2D.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,8 +46,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Script/God/RessourceAct.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Message/Message.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Message/MessageManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Script/Pathfinding &amp; AI/GeneratorMap.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Script/Save/SaveAndLoad.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@14.0.11/Shaders/2D/Sprite-Lit-Default.shader" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMPro_UGUI_Private.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../UnityProject/GenproceduralURP/Assets/NewBehaviourScript.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -68,21 +67,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Attach to Unity Editor.Attach to Unity Editor & Play.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Standalone Player.Start Unity.executor": "Debug",
-    "git-widget-placeholder": "Cycle-Day-Light",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor &amp; Play.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Standalone Player.Start Unity.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Cycle-Day-Light&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor &amp; Play">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.45f1\Editor\Unity.exe" />
@@ -156,6 +155,7 @@
       <workItem from="1729843951375" duration="20837000" />
       <workItem from="1730119007477" duration="11914000" />
       <workItem from="1730289056317" duration="9990000" />
+      <workItem from="1730379134450" duration="6400000" />
     </task>
     <servers />
   </component>
