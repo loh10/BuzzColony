@@ -91,7 +91,12 @@ public class SpawningRessources : MonoBehaviour
             }
         }
     }
-
+    
+    public void UnselectAll()
+    {
+        _actualRessource = null;
+    }
+    
     public void ChooseWood()
     {
         _actualRessource = _wood;

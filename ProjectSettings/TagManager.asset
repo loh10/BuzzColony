@@ -4,14 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Wood
   - Mountain
   - Rock
+  - Wood
   - Meat
-  - House
-  - Storage
   - Field
+  - House
   - LandingZone
+  - Storage
   layers:
   - Default
   - TransparentFX
@@ -48,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: minimapVisualizer
+    uniqueID: 1832682705
     locked: 0

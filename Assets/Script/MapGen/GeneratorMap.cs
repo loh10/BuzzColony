@@ -5,9 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class GeneratorMap : MonoBehaviour
 {
-    #region MapDeatail
+    #region MapDetail
     public Node[,] Nodes;
     public GameObject nodePrefab;
+    public Transform nodeParent;
     private Dictionary<Vector2Int, GameObject> nodeObjects;
     [Header("Mesh Options")] public bool generate;
     public int mapScale = 25;
@@ -136,8 +137,6 @@ public class GeneratorMap : MonoBehaviour
         // Initialize the Node component
         Node nodeComponent = nodeInstance.GetComponent<Node>();
         nodeComponent.Initialize(position, walkable);
-
-        // Store the node reference
         Nodes[x, z] = nodeComponent;
 
         // Store the node object for visualization
@@ -145,6 +144,7 @@ public class GeneratorMap : MonoBehaviour
 
         // Set the initial color based on walkability
         nodeInstance.GetComponent<SpriteRenderer>().color = walkable ? Color.white : Color.red;
+        nodeInstance.transform.SetParent(nodeParent);
     }
 
     // Get the GameObject associated with a node position

@@ -10,7 +10,7 @@ public class SpawningMenu : MonoBehaviour
     private bool isActive;
     [SerializeField] private TextMeshProUGUI textToChange;
     [SerializeField] private ConstructionMenu _constructionMenu;
-    public GameObject spawnRessources;
+    public SpawningRessources spawningRessources;
 
 
     void Start()
@@ -31,6 +31,7 @@ public class SpawningMenu : MonoBehaviour
         CloseOtherMenu();
         isActive = !isActive;
         textToChange.text = isActive ? "X" : "Ressources";
+        spawningRessources.UnselectAll();
         EnableAll(isActive);
     }
 
