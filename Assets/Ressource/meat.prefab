@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8519783499065998319}
   - component: {fileID: 1052859382731937519}
   m_Layer: 0
-  m_Name: meat
+  m_Name: Meat
   m_TagString: Meat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

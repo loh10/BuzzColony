@@ -96,22 +96,18 @@ public class Agent : MonoBehaviour
                         {
                             string resourceName = resourceRequirement.Key;
                             int collectedAmount = resourceRequirement.Value;
-
                             // Add the collected resource to the available resources
 
                             switch (resourceName)
                             {
                                 case "Wood":
                                     target = GetClosestRessource(GameObject.FindGameObjectsWithTag("Wood"));
-                                    print("Tree");
                                     break;
                                 case "Meat":
                                     target = GetClosestRessource(GameObject.FindGameObjectsWithTag("Meat"));
-                                    print("Meat");
                                     break;
                                 case "Rock":
                                     target = GetClosestRessource(GameObject.FindGameObjectsWithTag("Rock"));
-                                    print("Rock");
                                     break;
                                 default:
                                     target = new GameObject();
@@ -174,7 +170,7 @@ public class Agent : MonoBehaviour
     private void Update()
     {
         // If the agent is currently moving along a path, move towards the next node
-        if (isWorking && currentPath != null && currentNodeIndex < currentPath.Count)
+        if (isWorking && currentPath != null && currentNodeIndex < currentPath.Count+1)
         {
             MoveAlongPath();
         }
@@ -200,6 +196,25 @@ public class Agent : MonoBehaviour
         if (currentNodeIndex >= currentPath.Count)
         {
             // Finished the path
+            Collider2D[] collision = Physics2D.OverlapCircleAll(transform.position, 0.6f);
+            foreach (var col in collision)
+            {
+                if (col.gameObject.tag == "Wood")
+                {
+                    Destroy(col.gameObject);
+                    RessourceAct.Instance.AddRessource(1,Ressource.Bois);
+                }
+                else if (col.gameObject.tag == "Rock")
+                {
+                    Destroy(col.gameObject);
+                    RessourceAct.Instance.AddRessource(1,Ressource.Roche);
+                }
+                else if (col.gameObject.tag == "Meat")
+                {
+                    Destroy(col.gameObject);
+                    RessourceAct.Instance.AddRessource(1,Ressource.Nourriture);
+                }
+            }
             isWorking = false;
             return;
         }

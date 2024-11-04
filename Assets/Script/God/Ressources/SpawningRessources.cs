@@ -17,18 +17,19 @@ public class SpawningRessources : MonoBehaviour
     private int index;
     public Dictionary<string, string> ressourceList = new Dictionary<string, string>();
     private string _tagToAdd;
-    
+
     void Start()
     {
         if (SaveAndLoad.Instance != null)
         {
             index = SaveAndLoad.Instance._nbRessource;
-            
+
             if (index > 0)
             {
                 ressourceList = SaveAndLoad.Instance._ressource;
                 PlaceAllRessource();
             }
+
             index++;
         }
     }
@@ -59,6 +60,8 @@ public class SpawningRessources : MonoBehaviour
 
             _ressourceCreate = Instantiate(objectToConstruct, _spawning.StringToVector2(ressource.Value),
                 Quaternion.identity, _ressourceParent.transform);
+            SetParent(objectName,_ressourceCreate);
+
             _ressourceCreate.tag = _tagToAdd;
         }
 
@@ -76,7 +79,7 @@ public class SpawningRessources : MonoBehaviour
                 if (_canBuild)
                 {
                     _ressourceCreate = Instantiate(_actualRessource, _posToBuild, Quaternion.identity);
-                    _ressourceCreate.transform.SetParent(_ressourceParent.transform);
+                    SetParent(_actualRessource.name,_ressourceCreate);
                     _ressourceCreate.name = _actualRessource.name + index;
                     _canBuild = false;
                     ressourceList.Add(_actualRessource.name + index, _posToBuild.ToString());
@@ -86,17 +89,33 @@ public class SpawningRessources : MonoBehaviour
                         SaveAndLoad.Instance.SaveRessource(ressourceList, index);
                         SaveAndLoad.Instance.SaveGame();
                     }
+
                     RessourceAct.Instance.UseClick();
                 }
             }
         }
     }
-    
+
+    private void SetParent(string ressource,GameObject ressourceObject)
+    {
+        switch (ressource)
+        {
+            case "Wood":
+                ressourceObject.transform.SetParent(_ressourceParent.transform.GetChild(0));
+                break;
+            case "Rock":
+                ressourceObject.transform.SetParent(_ressourceParent.transform.GetChild(1));
+                break;
+            case "Meat":
+                ressourceObject.transform.SetParent(_ressourceParent.transform.GetChild(2));
+                break;
+        }
+    }
     public void UnselectAll()
     {
         _actualRessource = null;
     }
-    
+
     public void ChooseWood()
     {
         _actualRessource = _wood;
