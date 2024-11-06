@@ -28,7 +28,6 @@ public class ColonManager : MonoBehaviour
                         colonParent.parent.GetChild(1));
                     colonExist.Add(loadedColon);
                     loadedColon.GetComponent<Colon>().isMine = true;
-                    print("here");
                 }
             }
         }
@@ -48,6 +47,7 @@ public class ColonManager : MonoBehaviour
         if (constructionParent.childCount > 0 && colonExist.Count < constructionParent.childCount &&
             colonParent.childCount < 4)
         {
+            yield return new WaitForSeconds(Random.Range(mintTimer, maxTimer));
             Vector2 spawnPosition = new Vector2(0, 0);
             GameObject newColon = Instantiate(colonPrefab, spawnPosition, Quaternion.identity);
             colonExist.Add(newColon);
@@ -56,7 +56,6 @@ public class ColonManager : MonoBehaviour
                 constructionParent.GetChild(constructionParent.childCount - 1).gameObject;
         }
 
-        yield return new WaitForSeconds(Random.Range(mintTimer, maxTimer));
         StartCoroutine(SpawnColon());
     }
 }

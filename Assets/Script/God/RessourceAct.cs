@@ -9,6 +9,7 @@ public enum Ressource
     Nourriture,
     Roche,
     Bois,
+    Null
 }
 
 public class RessourceAct : MonoBehaviour
@@ -117,6 +118,11 @@ public class RessourceAct : MonoBehaviour
         clickText.text = $"{nbClick}/{maxRessource / 3}";
     }
 
+    public void ResetClick()
+    {
+        nbClick = maxRessource / 3;
+        UpdateText();
+    }
     private int SetMaxRessource()
     {
         return reserveParent.childCount * 10 + 30;

@@ -10,96 +10,93 @@ public class AStarPathfinder : MonoBehaviour
     {
         grid = FindObjectOfType<GeneratorMap>();
     }
+private List<Node> RetracePath(Node startNode, Node endNode)
+{
+    List<Node> path = new List<Node>();
+    Node currentNode = endNode;
 
-    public List<Node> FindPath(Vector2Int start, Vector2Int goal, Agent agent)
+    while (currentNode != startNode)
     {
-        Node startNode = grid.Nodes[start.x, start.y];
-        Node goalNode = grid.Nodes[goal.x, goal.y];
-
-        if (!goalNode.IsWalkable)
-        {
-            Debug.LogWarning("Goal Node is not walkable");
-        }
-
-        List<Node> openList = new List<Node>();
-        HashSet<Node> closedList = new HashSet<Node>();
-
-        openList.Add(startNode);
-
-        while (openList.Count > 0)
-        {
-            Node currentNode = openList[0];
-            for (int i = 1; i < openList.Count; i++)
-            {
-                if (openList[i].FCost < currentNode.FCost ||
-                    (openList[i].FCost == currentNode.FCost && openList[i].HCost < currentNode.HCost))
-                {
-                    currentNode = openList[i];
-                }
-            }
-
-            openList.Remove(currentNode);
-            closedList.Add(currentNode);
-
-            if (currentNode == goalNode)
-            {
-                // Path found, retrace it and assign to the agent
-
-
-                List<Node> path = RetracePath(startNode, goalNode);
-                if (agent)
-                {
-                    agent.SetPath(path);
-                }
-                else
-                {
-                    Debug.LogWarning("Failed to find a agent for the path");
-                }
-
-                return path;
-            }
-
-            foreach (Node neighbor in grid.GetNeighbors(currentNode))
-            {
-                if (!neighbor.IsWalkable || closedList.Contains(neighbor))
-                {
-                    continue;
-                }
-
-                int newGCost = currentNode.GCost + GetDistance(currentNode, neighbor);
-                if (newGCost < neighbor.GCost || !openList.Contains(neighbor))
-                {
-                    neighbor.GCost = newGCost;
-                    neighbor.HCost = GetDistance(neighbor, goalNode);
-                    neighbor.Parent = currentNode;
-
-                    if (!openList.Contains(neighbor))
-                    {
-                        openList.Add(neighbor);
-                    }
-                }
-            }
-        }
-
-        return null;
+        path.Add(currentNode);
+        currentNode = currentNode.Parent;
     }
 
-    private List<Node> RetracePath(Node startNode, Node endNode)
+    path.Reverse();
+    VisualizePath(path);
+    return path;
+}
+
+public List<Node> FindPath(Vector2Int start, Vector2Int goal, Agent agent)
+{
+    Node startNode = grid.Nodes[start.x, start.y];
+    Node goalNode = grid.Nodes[goal.x, goal.y];
+
+    if (!goalNode.IsWalkable)
     {
-        List<Node> path = new List<Node>();
-        Node currentNode = endNode;
-
-        while (currentNode != startNode)
-        {
-            path.Add(currentNode);
-            currentNode = currentNode.Parent;
-        }
-
-        path.Reverse();
-        VisualizePath(path);
-        return path;
+        Debug.LogWarning("Goal Node is not walkable");
+        return new List<Node>(); // Return an empty list if the goal node is not walkable
     }
 
+    List<Node> openList = new List<Node>();
+    HashSet<Node> closedList = new HashSet<Node>();
+
+    openList.Add(startNode);
+
+    while (openList.Count > 0)
+    {
+        Node currentNode = openList[0];
+        for (int i = 1; i < openList.Count; i++)
+        {
+            if (openList[i].FCost < currentNode.FCost ||
+                (openList[i].FCost == currentNode.FCost && openList[i].HCost < currentNode.HCost))
+            {
+                currentNode = openList[i];
+            }
+        }
+
+        openList.Remove(currentNode);
+        closedList.Add(currentNode);
+
+        if (currentNode == goalNode)
+        {
+            // Path found, retrace it and assign to the agent
+            List<Node> path = RetracePath(startNode, goalNode);
+            if (agent)
+            {
+                agent.SetPath(path);
+            }
+            else
+            {
+                Debug.LogWarning("Failed to find an agent for the path");
+            }
+
+            return path;
+        }
+
+        foreach (Node neighbor in grid.GetNeighbors(currentNode))
+        {
+            if (!neighbor.IsWalkable || closedList.Contains(neighbor))
+            {
+                continue;
+            }
+
+            int newGCost = currentNode.GCost + GetDistance(currentNode, neighbor);
+            if (newGCost < neighbor.GCost || !openList.Contains(neighbor))
+            {
+                neighbor.GCost = newGCost;
+                neighbor.HCost = GetDistance(neighbor, goalNode);
+                neighbor.Parent = currentNode;
+
+                if (!openList.Contains(neighbor))
+                {
+                    openList.Add(neighbor);
+                }
+            }
+        }
+    }
+
+    return new List<Node>(); // Return an empty list if no path is found
+}
     private void VisualizePath(List<Node> path)
     {
         foreach (Node node in path)

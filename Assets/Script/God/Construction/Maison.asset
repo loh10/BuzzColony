@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   constructionPrefab: {fileID: 1595369111789535320, guid: 57a8b97bed59c3f49a26c1f7492d905a, type: 3}
   constructionCost: 320000000000000000000000
-  constructionTime: 60
+  constructionTime: 10
   constructionSize: {x: 2, y: 2}
   tag: House

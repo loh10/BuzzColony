@@ -27,7 +27,7 @@ public class Agent : MonoBehaviour
 
     private void Start()
     {
-        starPathfinder = GameObject.Find("Pathfinder").GetComponent<AStarPathfinder>();
+        starPathfinder = GameObject.Find("PathfinderManager").GetComponent<AStarPathfinder>();
         // Initialize resources (e.g., wood and stone)
         resourcesAvailable["Wood"] = 0;
         resourcesAvailable["Stone"] = 0;
@@ -81,8 +81,6 @@ public class Agent : MonoBehaviour
 
             if (currentTask != null)
             {
-                //print("Task name : " + currentTask.TaskName + "  Task priority : " + currentTask.Priority);
-                print(TaskList[0].TaskName);
                 if (AreDependenciesMet(currentTask))
                 {
                     isWorking = true;
@@ -121,19 +119,16 @@ public class Agent : MonoBehaviour
                                 new Vector2Int((int)transform.position.x, (int)transform.position.y),
                                 new Vector2Int(targetX, targetY), this);
 
-                            if (resourcesAvailable.ContainsKey(resourceName))
-                            {
-                                resourcesAvailable[resourceName] += collectedAmount;
-                            }
-                            else
-                            {
-                                resourcesAvailable[resourceName] = collectedAmount;
-                            }
-                            //Test
-                            //Debug.Log($"Collected {collectedAmount} units of {resourceName}. Available: {resourcesAvailable[resourceName]}");
                         }
                     }
-
+                    else if (currentTask.TaskName == "Build Camp")
+                    {
+                        int targetX = (int)target.transform.position.x;
+                        int targetY = (int)target.transform.position.y;
+                        List<Node> path = starPathfinder.FindPath(
+                            new Vector2Int((int)transform.position.x, (int)transform.position.y),
+                            new Vector2Int(targetX, targetY), this);
+                    }
                     TaskList.Remove(currentTask);
                 }
                 else
@@ -149,7 +144,7 @@ public class Agent : MonoBehaviour
     private GameObject GetClosestRessource(GameObject[] ressource)
     {
         GameObject nearestProduct;
-        nearestProduct = ressource[0];
+        nearestProduct = ressource[0]?? new GameObject();
         foreach (GameObject res in ressource)
         {
             if (Vector3.Distance(this.transform.position, res.transform.position) <
@@ -170,7 +165,7 @@ public class Agent : MonoBehaviour
     private void Update()
     {
         // If the agent is currently moving along a path, move towards the next node
-        if (isWorking && currentPath != null && currentNodeIndex < currentPath.Count+1)
+        if (isWorking && currentPath != null && currentNodeIndex < currentPath.Count)
         {
             MoveAlongPath();
         }
@@ -179,9 +174,11 @@ public class Agent : MonoBehaviour
     // Start moving along the path
     public void SetPath(List<Node> path)
     {
+        print(path.Count);
         if (path == null || path.Count == 0)
         {
             Debug.LogWarning("Path is invalid or empty.");
+            isWorking = false; // Ensure the agent stops working if the path is invalid
             return;
         }
 
@@ -189,6 +186,7 @@ public class Agent : MonoBehaviour
         currentNodeIndex = 0;
         isWorking = true;
     }
+
 
     // Move the agent towards the next node in the path
     private void MoveAlongPath()

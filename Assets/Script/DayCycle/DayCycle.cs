@@ -15,7 +15,13 @@ public class DayCycle : MonoBehaviour
     [SerializeField] private Transform constructionTransform;
     private Light2D[] _light;
     [SerializeField] private bool lightOn;
+    private bool isPass;
+    [SerializeField]RessourceAct ressourceAct;
 
+    private void Start()
+    {
+        ressourceAct = RessourceAct.Instance;
+    }
 
     void Clock()
     {
@@ -64,10 +70,17 @@ public class DayCycle : MonoBehaviour
         else if (_hour >= hourDay && _hour < hourDay + 1)
         {
             volume.weight = 1 - _minute / 60;
+            isPass = false;
             if (lightOn && _minute > 25)
             {
                 CheckLight();
             }
+        }
+
+        if (_hour == 0 && _minute == 0 && !isPass)
+        {
+            isPass = true;
+            ressourceAct.ResetClick();
         }
     }
 

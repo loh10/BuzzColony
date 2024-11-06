@@ -103,7 +103,7 @@ public class ConstructionMenu : MonoBehaviour
                      RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[1], Ressource.Roche);
                      RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[2], Ressource.Nourriture);
                     _currentConstruction.tag = _tagToAdd;
-                    StartCoroutine(BuildConstruction(_currentConstructionSO.constructionTime, _currentConstruction));
+                    BuildConstruction(_currentConstruction);
                 }
             }
         }
@@ -136,28 +136,18 @@ public class ConstructionMenu : MonoBehaviour
         return true;
     }
 
-    private IEnumerator BuildConstruction(float _timeToBuild, GameObject _construction)
+    private void BuildConstruction( GameObject _construction)
     {
-        SpriteRenderer[] construction = _construction.GetComponentsInChildren<SpriteRenderer>();
+        SetParent(_currentConstruction, _tagToAdd);
         _currentConstruction = null;
         _nbConstruction++;
         constructionList.Add(_tagToAdd + _nbConstruction, constructionPosition.ToString());
-        if (SaveAndLoad.Instance)
+        if (SaveAndLoad.Instance)       
         {
             SaveAndLoad.Instance.SaveConstruction(constructionList, _nbConstruction);
             SaveAndLoad.Instance.SaveGame();
         }
-
-        foreach (var spriteRenderer in construction)
-        {
-            spriteRenderer.color = Color.cyan;
-        }
-
-        yield return new WaitForSeconds(_timeToBuild);
-        foreach (var spriteRenderer in construction)
-        {
-            spriteRenderer.color = Color.white;
-        }
+        _construction.GetComponent<Construction>().isPlace = true;
     }
 
     private Vector2 StringToVector2(string value)
@@ -269,7 +259,6 @@ public class ConstructionMenu : MonoBehaviour
             _currentConstruction = Instantiate(constructionType.constructionPrefab, worldPosition, Quaternion.identity);
             _size = constructionType.constructionSize;
             _tagToAdd = constructionType.tag;
-            SetParent(_currentConstruction, _tagToAdd);
             _currentConstructionSO = constructionType;
         }
     }
