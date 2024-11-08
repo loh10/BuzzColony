@@ -16,7 +16,7 @@ public class Agent : MonoBehaviour
 
     private List<Node> currentPath;  // The path to follow
     private int currentNodeIndex = 0;
-    private AStarPathfinder starPathfinder;
+    public AStarPathfinder starPathfinder;
 
     public enum agentTask
     {
