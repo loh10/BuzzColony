@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+using MyUtils;
 public class SpawningRessources : MonoBehaviour
 {
     [SerializeField] private GameObject _actualRessource;
     [SerializeField] private GameObject _rock, _wood, _meat;
     [SerializeField] private GameObject _ressourceCreate;
-    [SerializeField] private GameObject _ressourceParent;
     private Spawning _spawning = new Spawning();
     private Vector2 _posToBuild;
     private bool _canBuild;
@@ -40,8 +39,7 @@ public class SpawningRessources : MonoBehaviour
         {
             GameObject objectToConstruct = null;
             string objectName;
-            objectName = ressource.Key.Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "")
-                .Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
+            objectName = Utils.NumberRemover(ressource.Key);
             if (objectName == "Wood")
             {
                 objectToConstruct = _wood;
@@ -59,7 +57,7 @@ public class SpawningRessources : MonoBehaviour
             }
 
             _ressourceCreate = Instantiate(objectToConstruct, _spawning.StringToVector2(ressource.Value),
-                Quaternion.identity, _ressourceParent.transform);
+                Quaternion.identity, this.transform);
             SetParent(objectName,_ressourceCreate);
 
             _ressourceCreate.tag = _tagToAdd;
@@ -101,13 +99,13 @@ public class SpawningRessources : MonoBehaviour
         switch (ressource)
         {
             case "Wood":
-                ressourceObject.transform.SetParent(_ressourceParent.transform.GetChild(0));
+                ressourceObject.transform.SetParent(this.transform.GetChild(0));
                 break;
             case "Rock":
-                ressourceObject.transform.SetParent(_ressourceParent.transform.GetChild(1));
+                ressourceObject.transform.SetParent(this.transform.GetChild(1));
                 break;
             case "Meat":
-                ressourceObject.transform.SetParent(_ressourceParent.transform.GetChild(2));
+                ressourceObject.transform.SetParent(this.transform.GetChild(2));
                 break;
         }
     }

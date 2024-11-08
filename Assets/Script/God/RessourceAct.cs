@@ -14,17 +14,18 @@ public enum Ressource
 
 public class RessourceAct : MonoBehaviour
 {
-    public int nbWood;
-    public int nbStone;
-    public int nbFood;
-    public int nbClick;
-    public static RessourceAct Instance;
+    private int _nbWood;
+    private int _nbStone;
+    private int _nbFood;
+    private int _nbClick;
+    public static RessourceAct Instance { get; private set; }
     public TextMeshProUGUI woodText;
     public TextMeshProUGUI stoneText;
     public TextMeshProUGUI foodText;
     public TextMeshProUGUI clickText;
-    public int maxRessource;
+    public int maxRessource { get; private set; }
     public Transform reserveParent;
+    private SaveAndLoad _saveAndLoad;
 
     private void Awake()
     {
@@ -37,52 +38,52 @@ public class RessourceAct : MonoBehaviour
             Destroy(gameObject);
         }
 
-        UpdateText();
+        _saveAndLoad = SaveAndLoad.Instance;
+        SetMaxRessource();
     }
 
     private void Start()
     {
-        if (SaveAndLoad.Instance)
+        if (_saveAndLoad)
         {
-            nbWood = SaveAndLoad.Instance.nbWood;
-            nbStone = SaveAndLoad.Instance.nbStone;
-            nbFood = SaveAndLoad.Instance.nbFood;
-            nbClick = SaveAndLoad.Instance.nbClick;
+            _nbWood = _saveAndLoad.nbWood;
+            _nbStone = _saveAndLoad.nbStone;
+            _nbFood = _saveAndLoad.nbFood;
+            _nbClick = _saveAndLoad.nbClick;
         }
 
-        UpdateText();
+        SetMaxRessource();
     }
 
     public int GetWood()
     {
-        return nbWood;
+        return _nbWood;
     }
 
     public int GetStone()
     {
-        return nbStone;
+        return _nbStone;
     }
 
     public int GetFood()
     {
-        return nbFood;
+        return _nbFood;
     }
 
     public int GetClick()
     {
-        return nbClick;
+        return _nbClick;
     }
 
     public void UseClick()
     {
-        nbClick--;
-        if (SaveAndLoad.Instance)
+        _nbClick--;
+        if (_saveAndLoad)
         {
-            SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood, nbClick);
-            SaveAndLoad.Instance.SaveGame();
+            _saveAndLoad.SaveRessource(_nbWood, _nbStone, _nbFood, _nbClick);
         }
 
-        UpdateText();
+        SetMaxRessource();
     }
 
     public void AddRessource(int nbToAdd, Ressource ressourceToAdd)
@@ -90,41 +91,52 @@ public class RessourceAct : MonoBehaviour
         switch (ressourceToAdd)
         {
             case Ressource.Nourriture:
-                nbFood += nbToAdd;
+                _nbFood += nbToAdd;
                 break;
             case Ressource.Bois:
-                nbWood += nbToAdd;
+                _nbWood += nbToAdd;
                 break;
             case Ressource.Roche:
-                nbStone += nbToAdd;
+                _nbStone += nbToAdd;
                 break;
         }
 
-        if (SaveAndLoad.Instance)
+        if (_saveAndLoad)
         {
-            SaveAndLoad.Instance.SaveRessource(nbWood, nbStone, nbFood, nbClick);
-            SaveAndLoad.Instance.SaveGame();
+            _saveAndLoad.SaveRessource(_nbWood, _nbStone, _nbFood, _nbClick);
         }
 
-        UpdateText();
+        SetMaxRessource();
     }
 
     private void UpdateText()
     {
-        maxRessource = SetMaxRessource();
-        woodText.text = $"{nbWood}/{maxRessource}";
-        stoneText.text = $"{nbStone}/{maxRessource}";
-        foodText.text = $"{nbFood}/{maxRessource}";
-        clickText.text = $"{nbClick}/{maxRessource / 3}";
+        woodText.text = $"{_nbWood}/{maxRessource}";
+        stoneText.text = $"{_nbStone}/{maxRessource}";
+        foodText.text = $"{_nbFood}/{maxRessource}";
+        clickText.text = $"{_nbClick}/{maxRessource / 3}";
     }
 
     public void ResetClick()
     {
-        nbClick = maxRessource / 3;
+        _nbClick = maxRessource / 3;
         UpdateText();
     }
-    private int SetMaxRessource()
+
+    private void SetMaxRessource()
     {
-        return reserveParent.childCount * 10 + 30;
+        UpdateText();
+        maxRessource = reserveParent.childCount * 10 + 30;
+    }
+    
+    
+    private void OnGUI()
+    {
+        if (GUILayout.Button("AddRessource"))
+        {
+            AddRessource(maxRessource, Ressource.Bois);
+            AddRessource(maxRessource, Ressource.Roche);
+            AddRessource(maxRessource, Ressource.Nourriture);
+        }
     }
 }

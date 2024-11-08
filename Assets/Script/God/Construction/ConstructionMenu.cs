@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 using System.Globalization;
-
+using MyUtils;
+using UnityEngine.EventSystems;
 
 public class ConstructionMenu : MonoBehaviour
 {
@@ -26,19 +27,22 @@ public class ConstructionMenu : MonoBehaviour
     [SerializeField] private ConstructionSO _habitation, _reserve, _champs, _zoneAtterissage, _currentConstructionSO;
     [SerializeField] private Button _habitationButton, _reserveButton, _champsButton, _zoneAtterissageButton;
     private RessourceAct ressourceActuel;
+    private SaveAndLoad _saveAndLoad;
 
 
     public Dictionary<string, string> constructionList = new Dictionary<string, string>();
 
+
     private void Start()
     {
         _marketMenu.SetActive(false);
-        if (SaveAndLoad.Instance != null)
+        _saveAndLoad = SaveAndLoad.Instance;
+        if (_saveAndLoad != null)
         {
-            if (SaveAndLoad.Instance._construction != null)
+            if (_saveAndLoad._construction != null)
             {
-                constructionList = SaveAndLoad.Instance._construction;
-                _nbConstruction = SaveAndLoad.Instance._nbConstruction;
+                constructionList = _saveAndLoad._construction;
+                _nbConstruction = _saveAndLoad._nbConstruction;
 
                 BuildAllBatiment();
             }
@@ -51,40 +55,34 @@ public class ConstructionMenu : MonoBehaviour
         {
             GameObject objectToConstruct = null;
             string objectName;
-            objectName = construction.Key.Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "")
-                .Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
-            if (objectName == "House")
+            objectName = Utils.NumberRemover(construction.Key);
+            switch (objectName)
             {
-                objectToConstruct = _habitation.constructionPrefab;
-                _size = _habitation.constructionSize;
-                _tagToAdd = _habitation.tag;
+                case "House":
+                    objectToConstruct = _habitation.constructionPrefab;
+                    _size = _habitation.constructionSize;
+                    _tagToAdd = _habitation.tag;
+                    break;
+                case "Storage":
+                    objectToConstruct = _reserve.constructionPrefab;
+                    _size = _reserve.constructionSize;
+                    _tagToAdd = _reserve.tag;
+                    break;
+                case "Field":
+                    objectToConstruct = _champs.constructionPrefab;
+                    _size = _champs.constructionSize;
+                    _tagToAdd = _champs.tag;
+                    break;
+                case "Landingzone":
+                    objectToConstruct = _zoneAtterissage.constructionPrefab;
+                    _size = _zoneAtterissage.constructionSize;
+                    _tagToAdd = _zoneAtterissage.tag;
+                    break;
+                    
             }
-
-            if (objectName == "Storage")
-            {
-                objectToConstruct = _reserve.constructionPrefab;
-                _size = _reserve.constructionSize;
-                _tagToAdd = _reserve.tag;
-            }
-
-            if (objectName == "Field")
-            {
-                objectToConstruct = _champs.constructionPrefab;
-                _size = _champs.constructionSize;
-                _tagToAdd = _champs.tag;
-            }
-
-            if (objectName == "LandingZone")
-            {
-                objectToConstruct = _zoneAtterissage.constructionPrefab;
-                _size = _zoneAtterissage.constructionSize;
-                _tagToAdd = _zoneAtterissage.tag;
-            }
-
-            _currentConstruction = Instantiate(objectToConstruct, StringToVector2(construction.Value),
+            _currentConstruction = Instantiate(objectToConstruct, Utils.StringToVector2(construction.Value),
                 Quaternion.identity, _constructionParent);
         }
-
         _currentConstruction = null;
     }
 
@@ -99,11 +97,9 @@ public class ConstructionMenu : MonoBehaviour
                 constructionPosition = SpawnPosition(tilemap, out canBuild, _size.x, _size.y);
                 if (canBuild)
                 {
-                     RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[0], Ressource.Bois);
-                     RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[1], Ressource.Roche);
-                     RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[2], Ressource.Nourriture);
-                    _currentConstruction.tag = _tagToAdd;
                     BuildConstruction(_currentConstruction);
+                    CheckButton();
+
                 }
             }
         }
@@ -112,6 +108,7 @@ public class ConstructionMenu : MonoBehaviour
     private bool CheckRessource(int[] ressourceDemande)
     {
         ressourceActuel = RessourceAct.Instance;
+        
         for (int i = 0; i < ressourceDemande.Length; i++)
         {
             switch (i)
@@ -138,8 +135,12 @@ public class ConstructionMenu : MonoBehaviour
 
     private void BuildConstruction( GameObject _construction)
     {
-        SetParent(_currentConstruction, _tagToAdd);
+        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[0], Ressource.Bois);
+        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[1], Ressource.Roche);
+        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[2], Ressource.Nourriture);
+        _currentConstruction.tag = _tagToAdd;
         _currentConstruction = null;
+        SetParent(_currentConstruction, _tagToAdd);
         _nbConstruction++;
         constructionList.Add(_tagToAdd + _nbConstruction, constructionPosition.ToString());
         if (SaveAndLoad.Instance)       
@@ -150,19 +151,16 @@ public class ConstructionMenu : MonoBehaviour
         _construction.GetComponent<Construction>().isPlace = true;
     }
 
-    private Vector2 StringToVector2(string value)
-    {
-        value = value.Replace("(", "").Replace(")", "");
-        string[] vector = value.Split(',');
-        Vector2 vector2 = new Vector2(float.Parse(vector[0], CultureInfo.InvariantCulture.NumberFormat),
-            float.Parse(vector[1], CultureInfo.InvariantCulture.NumberFormat));
-        return vector2;
-    }
+    
 
     private void GetCellCenterPosition()
     {
         camera = Camera.main;
-        if (camera != null) worldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
+        if (camera != null)
+        {
+            worldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
+        }
+            
         cellPosition = tilemap.WorldToCell(worldPoint);
         cellCenterPosition = tilemap.GetCellCenterWorld(cellPosition);
     }
@@ -170,7 +168,7 @@ public class ConstructionMenu : MonoBehaviour
     private Vector3 SpawnPosition(Tilemap tilemap, out bool _canBuild, float sizeX, float sizeY)
     {
         GetCellCenterPosition();
-        bool isOverUI = UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+        bool isOverUI = EventSystem.current.IsPointerOverGameObject();
         if (tilemap.HasTile(cellPosition) && !isOverUI)
         {
             // Check if there is already wood on this tile

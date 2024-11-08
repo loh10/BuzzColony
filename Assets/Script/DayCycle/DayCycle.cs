@@ -4,23 +4,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Serialization;
 
 public class DayCycle : MonoBehaviour
 {
-    public int hourDay, hourNight;
-    float _second, _minute, _day;
-    float _hour = 8;
+    
     public float speed;
-    public Volume volume;
-    [SerializeField] private Transform constructionTransform;
+    [SerializeField] private int _hourDay;
+    [SerializeField] private int _hourNight;
+    [SerializeField] private Transform _constructionTransform;
+    [SerializeField] private bool _lightOn;
+    private float _second, _minute, _day;
+    private int _hour = 8;
+    private Volume _volume;
     private Light2D[] _light;
-    [SerializeField] private bool lightOn;
     private bool isPass;
-    [SerializeField]RessourceAct ressourceAct;
+    private RessourceAct _ressourceAct;
 
     private void Start()
     {
-        ressourceAct = RessourceAct.Instance;
+        _ressourceAct = RessourceAct.Instance;
+        _volume = GetComponent<Volume>();
     }
 
     void Clock()
@@ -47,31 +51,31 @@ public class DayCycle : MonoBehaviour
 
     void CheckLight()
     {
-        lightOn = !lightOn;
-        _light = constructionTransform.GetComponentsInChildren<Light2D>();
+        _lightOn = !_lightOn;
+        _light = _constructionTransform.GetComponentsInChildren<Light2D>();
         foreach (Light2D lightComponent in _light)
         {
-            lightComponent.enabled = lightOn;
+            lightComponent.enabled = _lightOn;
         }
     }
 
     void CheckHour()
     {
         //night
-        if (_hour >= hourNight && _hour < hourNight + 1)
+        if (_hour >= _hourNight && _hour < _hourNight + 1)
         {
-            volume.weight = _minute / 60;
-            if (!lightOn && _minute > 45)
+            _volume.weight = _minute / 60;
+            if (!_lightOn && _minute > 45)
             {
                 CheckLight();
             }
         }
         //_day
-        else if (_hour >= hourDay && _hour < hourDay + 1)
+        else if (_hour >= _hourDay && _hour < _hourDay + 1)
         {
-            volume.weight = 1 - _minute / 60;
+            _volume.weight = 1 - _minute / 60;
             isPass = false;
-            if (lightOn && _minute > 25)
+            if (_lightOn && _minute > 25)
             {
                 CheckLight();
             }
@@ -80,7 +84,7 @@ public class DayCycle : MonoBehaviour
         if (_hour == 0 && _minute == 0 && !isPass)
         {
             isPass = true;
-            ressourceAct.ResetClick();
+            _ressourceAct.ResetClick();
         }
     }
 
@@ -88,5 +92,6 @@ public class DayCycle : MonoBehaviour
     {
         Clock();
         CheckHour();
+
     }
 }
