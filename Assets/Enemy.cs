@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public enum EnemyBehavior { Passive, Aggressive }
-    public EnemyBehavior behavior = EnemyBehavior.Passive;
+    public bool isAgressive = false;
 
     public float detectionRange = 5f;
     public float attackRange = 1f;
@@ -25,7 +24,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        if (behavior == EnemyBehavior.Passive) return;
+        if (!isAgressive) return;
 
         DetectColons();
 
