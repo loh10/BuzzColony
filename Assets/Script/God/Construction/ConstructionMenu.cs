@@ -78,11 +78,12 @@ public class ConstructionMenu : MonoBehaviour
                     _size = _zoneAtterissage.constructionSize;
                     _tagToAdd = _zoneAtterissage.tag;
                     break;
-                    
             }
+
             _currentConstruction = Instantiate(objectToConstruct, Utils.StringToVector2(construction.Value),
                 Quaternion.identity, _constructionParent);
         }
+
         _currentConstruction = null;
     }
 
@@ -99,7 +100,6 @@ public class ConstructionMenu : MonoBehaviour
                 {
                     BuildConstruction(_currentConstruction);
                     CheckButton();
-
                 }
             }
         }
@@ -108,7 +108,7 @@ public class ConstructionMenu : MonoBehaviour
     private bool CheckRessource(int[] ressourceDemande)
     {
         ressourceActuel = RessourceAct.Instance;
-        
+
         for (int i = 0; i < ressourceDemande.Length; i++)
         {
             switch (i)
@@ -133,25 +133,25 @@ public class ConstructionMenu : MonoBehaviour
         return true;
     }
 
-    private void BuildConstruction( GameObject _construction)
+    private void BuildConstruction(GameObject _construction)
     {
         RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[0], Ressource.Bois);
         RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[1], Ressource.Roche);
         RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[2], Ressource.Nourriture);
         _currentConstruction.tag = _tagToAdd;
-        _currentConstruction = null;
         SetParent(_currentConstruction, _tagToAdd);
         _nbConstruction++;
         constructionList.Add(_tagToAdd + _nbConstruction, constructionPosition.ToString());
-        if (SaveAndLoad.Instance)       
+        if (SaveAndLoad.Instance)
         {
             SaveAndLoad.Instance.SaveConstruction(constructionList, _nbConstruction);
             SaveAndLoad.Instance.SaveGame();
         }
+
         _construction.GetComponent<Construction>().isPlace = true;
+        _currentConstruction = null;
     }
 
-    
 
     private void GetCellCenterPosition()
     {
@@ -160,7 +160,7 @@ public class ConstructionMenu : MonoBehaviour
         {
             worldPoint = camera.ScreenToWorldPoint(Input.mousePosition);
         }
-            
+
         cellPosition = tilemap.WorldToCell(worldPoint);
         cellCenterPosition = tilemap.GetCellCenterWorld(cellPosition);
     }
@@ -263,6 +263,7 @@ public class ConstructionMenu : MonoBehaviour
 
     private void SetParent(GameObject _construction, string tag)
     {
+        print(_construction.name);
         switch (tag)
         {
             case "House":

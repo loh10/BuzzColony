@@ -65,7 +65,6 @@ public class SaveAndLoad : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //LoadGame();
     }
 
     public void SaveMap(int seed)
@@ -90,7 +89,7 @@ public class SaveAndLoad : MonoBehaviour
         _colon.Add(index, position);
     }
 
-    public void SaveRessource(int Wood, int Stone, int Food,int Click)
+    public void SaveRessourceAct(int Wood, int Stone, int Food,int Click)
     {
         nbWood = Wood;
         nbStone = Stone;

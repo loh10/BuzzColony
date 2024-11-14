@@ -80,7 +80,7 @@ public class RessourceAct : MonoBehaviour
         _nbClick--;
         if (_saveAndLoad)
         {
-            _saveAndLoad.SaveRessource(_nbWood, _nbStone, _nbFood, _nbClick);
+            _saveAndLoad.SaveRessourceAct(_nbWood, _nbStone, _nbFood, _nbClick);
         }
 
         SetMaxRessource();
@@ -103,7 +103,7 @@ public class RessourceAct : MonoBehaviour
 
         if (_saveAndLoad)
         {
-            _saveAndLoad.SaveRessource(_nbWood, _nbStone, _nbFood, _nbClick);
+            _saveAndLoad.SaveRessourceAct(_nbWood, _nbStone, _nbFood, _nbClick);
         }
 
         SetMaxRessource();
@@ -128,7 +128,6 @@ public class RessourceAct : MonoBehaviour
         UpdateText();
         maxRessource = reserveParent.childCount * 10 + 30;
     }
-    
     
     private void OnGUI()
     {
