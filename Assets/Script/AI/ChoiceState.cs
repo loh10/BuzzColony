@@ -1,9 +1,18 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderGraph.Internal;
+using MyUtils;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
+
+public enum ActTask
+{
+    Collect,
+    Build,
+    Fight,
+    Nothing
+};
 
 public class ChoiceState : MonoBehaviour
 {
@@ -14,24 +23,37 @@ public class ChoiceState : MonoBehaviour
     public Vector2Int pathGoal;
     public bool randomPath;
 
+    public ActTask actTask = ActTask.Nothing;
+    public bool isWorking = false;
+    private Colon colon;
+
     #region Ressource
 
     private RessourceAct _ressourceAct;
     [SerializeField] private int _ressourceNb;
     [SerializeField] private string _ressourceMin;
 
+    Transform woodTransform;
+    Transform rockTransform;
+    Transform meatTransform;
+
     #endregion
 
     #region Ennemi
 
-    [SerializeField] private Transform _ennemiParent;
+    [Header("Ennemi")] [SerializeField] private Transform _ennemiParent;
     [SerializeField] private float detectRange;
+
+    [Space(2)]
 
     #endregion
 
     #region Construction
 
-    [SerializeField] private Transform _constructionParent;
+    [Header("Construction")]
+    [SerializeField]
+    private Transform _constructionParent;
+
     private List<Construction> _constructionInProgresse = new List<Construction>();
     private GameObject _nearestConstruction;
 
@@ -40,31 +62,42 @@ public class ChoiceState : MonoBehaviour
 
     void Start()
     {
+        woodTransform = GameObject.Find("Wood").transform;
+        meatTransform = GameObject.Find("Meat").transform;
+        rockTransform = GameObject.Find("Rock").transform;
+        agent = GetComponent<Agent>();
+        _constructionParent = GameObject.Find("Construction").transform;
+        _ennemiParent = GameObject.Find("Ennemi").transform;
         _ressourceAct = RessourceAct.Instance;
+        aStarPathfinder = GetComponent<AStarPathfinder>();
+        colon = GetComponent<Colon>();
     }
 
     void Update()
     {
-        print(CheckRessource());
-        if (CheckEnnemi()) //check if ennemy near
+        if (!isWorking && colon.isMine)
         {
-            print("Ennemi");
-        }
-        else if (CheckConstrucionInProgresse()) //Check si construction a faire
-        {
-            print("go construction");
-            CheckNearestConstruction();
-            TaskManager.Instance.AssignTaskToAgent(agent, "Build Camp");
-        }
-        else if (CheckRessource()) //check ressource
-        {
-            print("go To ressource");
-            RecoltRessource();
-        }
-        else //balade
-        {
-            print(_ressourceAct.gameObject.transform.childCount);
-            print("balade");
+            if (CheckEnnemi()) //check if ennemy near
+            {
+                actTask = ActTask.Fight;
+            }
+            else if (CheckConstrucionInProgresse()) //Check si construction a faire
+            {
+                actTask = ActTask.Build;
+                isWorking = true;
+                CheckNearestConstruction();
+            }
+            else if (CheckRessource()) //check ressource
+            {
+                isWorking = true;
+                actTask = ActTask.Collect;
+                RecoltRessource();
+            }
+            else //balade
+            {
+                actTask = ActTask.Nothing;
+                isWorking = false;
+            }
         }
     }
 
@@ -115,7 +148,9 @@ public class ChoiceState : MonoBehaviour
         }
 
         _nearestConstruction = nearestConstruction;
-        agent.target = _nearestConstruction;
+        GoToRessource(new Vector2Int((int)transform.position.x, (int)transform.position.y),
+            new Vector2Int((int)nearestConstruction.transform.position.x,
+                (int)nearestConstruction.transform.position.y));
     }
 
     #endregion
@@ -126,8 +161,7 @@ public class ChoiceState : MonoBehaviour
     {
         if ((_ressourceAct.GetWood() < _ressourceAct.maxRessource ||
              _ressourceAct.GetStone() < _ressourceAct.maxRessource ||
-             _ressourceAct.GetFood() < _ressourceAct.maxRessource) &&
-            _ressourceAct.gameObject.transform.childCount >= 3)
+             _ressourceAct.GetFood() < _ressourceAct.maxRessource))
         {
             return true;
         }
@@ -143,86 +177,104 @@ public class ChoiceState : MonoBehaviour
             { "Meat", _ressourceAct.GetFood() }
         };
         GetLessRessource(actualRessource);
-
-        if (_ressourceNb < _ressourceAct.maxRessource && _ressourceNb > 0)
+        print($"{_ressourceNb+1} et {_ressourceAct.maxRessource}");
+        if (_ressourceNb+1 < _ressourceAct.maxRessource && _ressourceNb > 0)
         {
+            isWorking = true;
             ChooseRessource(_ressourceMin);
         }
         else
         {
-            print("No ressource to collect");
+            isWorking = false;
         }
     }
 
     void GetLessRessource(Dictionary<string, int> ressource)
     {
         _ressourceNb = 0;
-        var minRessource = ressource.OrderBy(_ressource => _ressource.Value).First();
-        _ressourceMin = minRessource.Key;
+        var minRessource = ressource.OrderBy(_ressource => _ressource.Value);
+        _ressourceMin = minRessource.First().Key;
+        //check bois plus petit
         while (_ressourceNb == 0)
         {
-            switch (_ressourceMin)
+            _ressourceNb = woodTransform.childCount;
+            _ressourceMin = "Wood";
+            if (_ressourceNb == 0 || _ressourceAct.GetWood()+ _ressourceNb >= _ressourceAct.maxRessource)
             {
-                case "Wood": //Wood
-                    _ressourceNb = GameObject.Find("Wood").transform.childCount;
-                    if (_ressourceNb == 0)
+                _ressourceNb = rockTransform.childCount;
+                _ressourceMin = "Rock";
+                if (_ressourceNb == 0|| _ressourceAct.GetStone()+ _ressourceNb >= _ressourceAct.maxRessource)
+                {
+                    _ressourceNb = meatTransform.childCount;
+                    _ressourceMin = "Meat";
+                    if (_ressourceNb == 0|| _ressourceAct.GetFood()+ _ressourceNb >= _ressourceAct.maxRessource)
                     {
-                        _ressourceMin = "Rock";
+                        _ressourceNb = -1;
+                        isWorking = false;
+                        return;
                     }
-
-                    break;
-
-                case "Rock": //Rock
-                    _ressourceNb = GameObject.Find("Rock").transform.childCount;
-                    if (_ressourceNb == 0)
-                    {
-                        _ressourceMin = "Meat";
-                    }
-
-                    break;
-
-                case "Meat": //Meat
-                    _ressourceNb = GameObject.Find("Meat").transform.childCount;
-                    if (_ressourceNb == 0)
-                    {
-                        _ressourceMin = "Default";
-                    }
-
-                    break;
-
-                default:
-                    _ressourceNb = -1;
-                    break;
+                }
             }
-        }
-
-        if (_ressourceNb == -1)
-        {
-            print("No ressource to collect");
         }
     }
 
     void ChooseRessource(string indexRessource)
     {
+        Transform[] ressourceTransform = null;
+        GameObject[] ressource = null;
+
+
         switch (indexRessource)
         {
             case "Wood": //Wood
-                TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources",
-                    new Dictionary<string, int> { { "Wood", 10 } });
+                ressourceTransform = woodTransform.transform.GetComponentsInChildren<Transform>();
                 break;
             case "Rock": //Rock
-                TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources",
-                    new Dictionary<string, int> { { "Rock", 10 } });
+                ressourceTransform = rockTransform.transform.GetComponentsInChildren<Transform>();
                 break;
             case "Meat": //Meat
-                TaskManager.Instance.AssignTaskToAgent(agent, "Collect Resources",
-                    new Dictionary<string, int> { { "Meat", 10 } });
+                ressourceTransform = meatTransform.transform.GetComponentsInChildren<Transform>();
                 break;
-            default:
-                print("Invalid ressource");
-                break;
+        }
+
+        if (ressourceTransform != null)
+        {
+            ressource = ressourceTransform.Select(t => t.gameObject).ToArray();
+            ressource = Utils.RemoveFirstIndex(ressource);
+            if (ressource.Length != 0)
+            {
+                GameObject nearestRessource = GetClosestRessource(ressource);
+                GoToRessource(new Vector2Int((int)transform.position.x, (int)transform.position.y),
+                    new Vector2Int((int)nearestRessource.transform.position.x,
+                        (int)nearestRessource.transform.position.y));
+                return;
+            }
+
+            isWorking = false;
         }
     }
 
+    private GameObject GetClosestRessource(GameObject[] ressource)
+    {
+        GameObject nearestProduct;
+        nearestProduct = ressource[0] ?? new GameObject();
+        foreach (GameObject res in ressource)
+        {
+            if (Vector3.Distance(this.transform.position, res.transform.position) <
+                Vector3.Distance(this.transform.position, nearestProduct.transform.position))
+            {
+                nearestProduct = res;
+            }
+        }
+
+        return nearestProduct;
+    }
+
     #endregion
+
+    private void GoToRessource(Vector2Int x, Vector2Int y)
+    {
+        aStarPathfinder.FindPath(x, y, agent);
+        isWorking = true;
+    }
 }

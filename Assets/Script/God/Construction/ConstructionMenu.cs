@@ -17,7 +17,7 @@ public class ConstructionMenu : MonoBehaviour
     public Tilemap tilemap;
     private Vector3 constructionPosition;
     private bool canBuild;
-    private new Camera camera;
+    private Camera camera;
     private Vector3 worldPoint;
     private Vector3Int cellPosition;
     private Vector3 cellCenterPosition;
@@ -263,7 +263,6 @@ public class ConstructionMenu : MonoBehaviour
 
     private void SetParent(GameObject _construction, string tag)
     {
-        print(_construction.name);
         switch (tag)
         {
             case "House":

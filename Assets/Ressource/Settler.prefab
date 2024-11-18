@@ -179,6 +179,8 @@ GameObject:
   - component: {fileID: 4880358517675974957}
   - component: {fileID: 6906528558876592143}
   - component: {fileID: 4150805952268914544}
+  - component: {fileID: 4096794804366247823}
+  - component: {fileID: 3302302214877916644}
   m_Layer: 0
   m_Name: Settler
   m_TagString: Untagged
@@ -249,6 +251,41 @@ MonoBehaviour:
   legs: {fileID: 5580167614327220667}
   speed: 1.5
   _constructionTarget: {fileID: 0}
+--- !u!114 &4096794804366247823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140919396553805620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1b235e675179c40a59b33be87d0014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  aStarPathfinder: {fileID: 0}
+  pathStart: {x: 0, y: 0}
+  pathGoal: {x: 0, y: 0}
+  randomPath: 0
+  isWorking: 0
+  _ressourceNb: 0
+  _ressourceMin: 
+  _ennemiParent: {fileID: 0}
+  detectRange: 0
+  _constructionParent: {fileID: 0}
+--- !u!114 &3302302214877916644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4140919396553805620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6362583f42dd83f4183b3f33ce5ce04b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6873629634923742870
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class RessourceAct : MonoBehaviour
     private int _nbWood;
     private int _nbStone;
     private int _nbFood;
-    private int _nbClick;
+    private int _nbClick = 10;
     public static RessourceAct Instance { get; private set; }
     public TextMeshProUGUI woodText;
     public TextMeshProUGUI stoneText;
@@ -129,13 +129,4 @@ public class RessourceAct : MonoBehaviour
         maxRessource = reserveParent.childCount * 10 + 30;
     }
     
-    private void OnGUI()
-    {
-        if (GUILayout.Button("AddRessource"))
-        {
-            AddRessource(maxRessource, Ressource.Bois);
-            AddRessource(maxRessource, Ressource.Roche);
-            AddRessource(maxRessource, Ressource.Nourriture);
-        }
-    }
 }

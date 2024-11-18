@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
+using System.Runtime.CompilerServices;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace MyUtils
@@ -28,6 +31,22 @@ namespace MyUtils
         {
             return value.Replace("1", "").Replace("2", "").Replace("3", "").Replace("4", "")
                 .Replace("5", "").Replace("6", "").Replace("7", "").Replace("8", "").Replace("9", "").Replace("0", "");
+        }
+
+        /// <summary>
+        /// Remove the first index of an array
+        /// </summary>
+        /// <param name="array"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static T[] RemoveFirstIndex<T>( T[] array)
+        {
+            T[] newArray = new T[array.Length - 1];
+            for (int i = 1; i < array.Length; i++)
+            {
+                newArray[i - 1] = array[i];
+            }
+            return newArray;
         }
     }
 }

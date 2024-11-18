@@ -10,6 +10,7 @@ public class Construction : MonoBehaviour
     public bool isPlace;
     public float rangeBuild;
     private float timer;
+    private GameObject colon;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class Construction : MonoBehaviour
             {
                 isBuild = true;
                 isPlace = false;
+                colon.GetComponent<ChoiceState>().isWorking = false;
             }
             else
             {
@@ -34,15 +36,15 @@ public class Construction : MonoBehaviour
 
     bool ColonNear()
     {
-        Transform colon = GameObject.Find("ColonMine").GetComponent<Transform>();
-        foreach (Transform colonIsMine in colon.GetComponentsInChildren<Transform>())
+        Transform colonList = GameObject.Find("ColonMine").GetComponent<Transform>();
+        foreach (Transform colonIsMine in colonList.GetComponentsInChildren<Transform>())
         {
             if (colonIsMine.GetComponent<Agent>() && Vector3.Distance(colonIsMine.position, transform.position) < rangeBuild)
             {
+                colon = colonIsMine.gameObject;
                 return true;
             }
         }
-
         return false;
     }
 }
