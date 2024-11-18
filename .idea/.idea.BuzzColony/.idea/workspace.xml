@@ -6,22 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="af6a406e-4f04-43c5-a89a-657b7cf4c260" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.BuzzColony/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Ressource/Settler.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Ressource/Settler.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/MinimapTexture.renderTexture" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MinimapTexture.renderTexture" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/AI/ChoiceState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/AI/ChoiceState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/AI/Tasks/Agent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/AI/Tasks/Agent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/AI/Tasks/MyTask.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/AI/Tasks/MyTask.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/AI/Tasks/TaskManager.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/AI/Tasks/TaskManager.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Colon/Colon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Colon/Colon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Construction/Construction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Construction/Construction.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Construction/ConstructionMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/Construction/ZoneDatterissage.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/Construction/ZoneDatterissage.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/God/RessourceAct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/God/RessourceAct.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Script/Utils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Script/Utils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +69,7 @@
     &quot;Attach to Unity Editor.Attach to Unity Editor &amp; Play.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Standalone Player.Start Unity.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;AI-Recolt-Ressource&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -186,6 +172,7 @@
       <workItem from="1731052685938" duration="37000" />
       <workItem from="1731673950482" duration="14200000" />
       <workItem from="1731919620529" duration="12672000" />
+      <workItem from="1731945433758" duration="151000" />
     </task>
     <servers />
   </component>

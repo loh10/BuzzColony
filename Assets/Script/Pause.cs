@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
@@ -19,12 +20,7 @@ public class Pause : MonoBehaviour
     public void Quit()
     {
         SaveAndLoad.Instance.SaveGame();
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            PauseMenu.SetActive(!PauseMenu.activeSelf);
-    }
 }
