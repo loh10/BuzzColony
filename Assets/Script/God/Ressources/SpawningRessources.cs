@@ -96,6 +96,7 @@ public class SpawningRessources : MonoBehaviour
 
     private void SetParent(string ressource,GameObject ressourceObject)
     {
+        Debug.Log(ressource);
         switch (ressource)
         {
             case "Wood":

@@ -177,7 +177,6 @@ public class ChoiceState : MonoBehaviour
             { "Meat", _ressourceAct.GetFood() }
         };
         GetLessRessource(actualRessource);
-        print($"{_ressourceNb+1} et {_ressourceAct.maxRessource}");
         if (_ressourceNb+1 < _ressourceAct.maxRessource && _ressourceNb > 0)
         {
             isWorking = true;
