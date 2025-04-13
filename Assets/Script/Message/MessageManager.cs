@@ -28,20 +28,20 @@ public class MessageManager : MonoBehaviour
         {
             newMessage.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>().text =
                 messageToAdd.btnText;
-            Ressource ressource = Ressource.Bois;
+            ERessource eRessource = ERessource.Bois;
             switch ( Regex.Match(messageToAdd.content, @"\b(Nourriture|Roche|Bois)\b", RegexOptions.IgnoreCase).Value)
             {
                 case "Bois":
-                    ressource = Ressource.Bois;
+                    eRessource = ERessource.Bois;
                     break;
                 case "Roche":
-                    ressource = Ressource.Roche;
+                    eRessource = ERessource.Roche;
                     break;
                 case "Nourriture":
-                    ressource = Ressource.Nourriture;
+                    eRessource = ERessource.Nourriture;
                     break;
             }
-            newMessage.GetComponentInChildren<MessageBtn>().GetValue(int.Parse(Regex.Match(messageToAdd.content, @"\d+").Value), ressource);
+            newMessage.GetComponentInChildren<MessageBtn>().GetValue(int.Parse(Regex.Match(messageToAdd.content, @"\d+").Value), eRessource);
         }
         else 
         {

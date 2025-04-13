@@ -6,13 +6,13 @@ using UnityEngine;
 public class MessageBtn : MonoBehaviour
 {
     private int nb;
-    private Ressource ressource;
+    private ERessource _eRessource;
     private int index;
 
-    public void GetValue(int nbToAdd, Ressource nameToAdd)
+    public void GetValue(int nbToAdd, ERessource nameToAdd)
     {
         nb = nbToAdd;
-        ressource = nameToAdd;
+        _eRessource = nameToAdd;
     }
 
     public void Recruter()
@@ -20,9 +20,9 @@ public class MessageBtn : MonoBehaviour
         index = transform.parent.transform.GetSiblingIndex();
         Colon[] allChildren= GameObject.Find("ColonParent").GetComponentsInChildren<Colon>();
         if(CheckRessources(allChildren[index].nbRessources, RessourceAct.Instance.GetWood(), RessourceAct.Instance.GetStone(),
-               RessourceAct.Instance.GetFood(), allChildren[index].nameRessource))
+               RessourceAct.Instance.GetFood(), allChildren[index].nameERessource))
         {
-            RessourceAct.Instance.AddRessource(-allChildren[index].nbRessources, allChildren[index].nameRessource);
+            RessourceAct.Instance.AddRessource(-allChildren[index].nbRessources, allChildren[index].nameERessource);
             allChildren[index].isMine = true;
             allChildren[index].transform.parent = GameObject.Find("ColonMine").transform;
             if (SaveAndLoad.Instance)
@@ -35,23 +35,23 @@ public class MessageBtn : MonoBehaviour
     }
 
 
-    public bool CheckRessources(int nbNeed, int nbWood, int nbStone, int nbFood, Ressource ressource)
+    public bool CheckRessources(int nbNeed, int nbWood, int nbStone, int nbFood, ERessource eRessource)
     {
-        switch (ressource)
+        switch (eRessource)
         {
-            case Ressource.Nourriture:
+            case ERessource.Nourriture:
                 if (nbFood >= nb)
                 {
                     return true;
                 }
                 break;
-            case Ressource.Bois:
+            case ERessource.Bois:
                 if (nbWood >= nb)
                 {
                     return true;
                 }
                 break;
-            case Ressource.Roche:
+            case ERessource.Roche:
                 if (nbStone >= nb)
                 {
                     return true;

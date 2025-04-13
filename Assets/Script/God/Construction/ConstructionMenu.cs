@@ -135,9 +135,9 @@ public class ConstructionMenu : MonoBehaviour
 
     private void BuildConstruction(GameObject _construction)
     {
-        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[0], Ressource.Bois);
-        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[1], Ressource.Roche);
-        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[2], Ressource.Nourriture);
+        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[0], ERessource.Bois);
+        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[1], ERessource.Roche);
+        RessourceAct.Instance.AddRessource(-_currentConstructionSO.constructionCost[2], ERessource.Nourriture);
         _currentConstruction.tag = _tagToAdd;
         SetParent(_currentConstruction, _tagToAdd);
         _nbConstruction++;

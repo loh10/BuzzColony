@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Colon : MonoBehaviour
@@ -10,7 +11,7 @@ public class Colon : MonoBehaviour
 
     public bool isMine;
     public int nbRessources;
-    public Ressource nameRessource;
+    [FormerlySerializedAs("nameRessource")] public ERessource nameERessource;
     private bool notAsk;
     #endregion
 
@@ -30,7 +31,6 @@ public class Colon : MonoBehaviour
     void Start()
     {
         ChooseClothe(head, body, legs);
-        
     }
 
     private void ChooseRessourceToAsk()
@@ -40,16 +40,16 @@ public class Colon : MonoBehaviour
         switch (Random.Range(0, 3))
         {
             case 0:
-                nameRessource= Ressource.Bois;
+                nameERessource= ERessource.Bois;
                 break;
             case 1:
-                nameRessource=Ressource.Roche;
+                nameERessource=ERessource.Roche;
                 break;
             case 2:
-                nameRessource=Ressource.Nourriture;
+                nameERessource=ERessource.Nourriture;
                 break;
         }
-        new Message($"Sauvage veut {nbRessources} de {nameRessource}" , true, "Recruter");
+        new Message($"Autochtone veut {nbRessources} de {nameERessource}" , true, "Recruter");
     }
 
     private void Update()
@@ -71,6 +71,7 @@ public class Colon : MonoBehaviour
             }
             if(Vector2.Distance(transform.position, _constructionTarget.transform.position) < 3f && !notAsk)
             {
+                Debug.Log("Ask Ressource");
                 ChooseRessourceToAsk();
                 notAsk = true;
             }

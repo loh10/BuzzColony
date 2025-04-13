@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public enum Ressource
+public enum ERessource
 {
     Nourriture,
     Roche,
@@ -14,10 +14,10 @@ public enum Ressource
 
 public class RessourceAct : MonoBehaviour
 {
-    private int _nbWood;
-    private int _nbStone;
-    private int _nbFood;
-    private int _nbClick = 10;
+    [SerializeField]private int _nbWood;
+    [SerializeField]private int _nbStone;
+    [SerializeField]private int _nbFood;
+    [SerializeField]private int _nbClick = 10;
     public static RessourceAct Instance { get; private set; }
     public TextMeshProUGUI woodText;
     public TextMeshProUGUI stoneText;
@@ -86,17 +86,17 @@ public class RessourceAct : MonoBehaviour
         SetMaxRessource();
     }
 
-    public void AddRessource(int nbToAdd, Ressource ressourceToAdd)
+    public void AddRessource(int nbToAdd, ERessource eRessourceToAdd)
     {
-        switch (ressourceToAdd)
+        switch (eRessourceToAdd)
         {
-            case Ressource.Nourriture:
+            case ERessource.Nourriture:
                 _nbFood += nbToAdd;
                 break;
-            case Ressource.Bois:
+            case ERessource.Bois:
                 _nbWood += nbToAdd;
                 break;
-            case Ressource.Roche:
+            case ERessource.Roche:
                 _nbStone += nbToAdd;
                 break;
         }

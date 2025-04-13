@@ -28,7 +28,6 @@ public class ChoiceState : MonoBehaviour
     private Colon colon;
 
     #region Ressource
-
     private RessourceAct _ressourceAct;
     [SerializeField] private int _ressourceNb;
     [SerializeField] private string _ressourceMin;
@@ -36,35 +35,45 @@ public class ChoiceState : MonoBehaviour
     Transform woodTransform;
     Transform rockTransform;
     Transform meatTransform;
-
     #endregion
 
     #region Ennemi
-
     [Header("Ennemi")] [SerializeField] private Transform _ennemiParent;
     [SerializeField] private float detectRange;
 
     [Space(2)]
-
     #endregion
-
     #region Construction
-
     [Header("Construction")]
     [SerializeField]
     private Transform _constructionParent;
 
     private List<Construction> _constructionInProgresse = new List<Construction>();
     private GameObject _nearestConstruction;
-
     #endregion
 
 
     void Start()
     {
-        woodTransform = GameObject.Find("Wood").transform;
-        meatTransform = GameObject.Find("Meat").transform;
-        rockTransform = GameObject.Find("Rock").transform;
+        GameObject woodObject = GameObject.Find("Wood");
+        GameObject rockObject = GameObject.Find("Rock");
+        GameObject meatObject = GameObject.Find("Meat");
+
+        if (woodObject != null)
+            woodTransform = woodObject.transform;
+        else
+            Debug.LogError("Wood object not found in the scene!");
+
+        if (rockObject != null)
+            rockTransform = rockObject.transform;
+        else
+            Debug.LogError("Rock object not found in the scene!");
+
+        if (meatObject != null)
+            meatTransform = meatObject.transform;
+        else
+            Debug.LogError("Meat object not found in the scene!");
+
         agent = GetComponent<Agent>();
         _constructionParent = GameObject.Find("Construction").transform;
         _ennemiParent = GameObject.Find("Ennemi").transform;
@@ -102,7 +111,6 @@ public class ChoiceState : MonoBehaviour
     }
 
     #region Ennemi
-
     private bool CheckEnnemi()
     {
         foreach (Transform ennemi in _ennemiParent)
@@ -115,48 +123,43 @@ public class ChoiceState : MonoBehaviour
 
         return false;
     }
-
     #endregion
 
     #region Construction
-
     private bool CheckConstrucionInProgresse()
     {
+        _constructionInProgresse.Clear(); // Clear the list to avoid duplicates
         foreach (Construction construction in _constructionParent.GetComponentsInChildren<Construction>())
         {
-            if (construction.isBuild == false)
+            if (!construction.isBuild && !_constructionInProgresse.Contains(construction))
             {
                 _constructionInProgresse.Add(construction);
-                return true;
             }
         }
 
-        return false;
+        return _constructionInProgresse.Count > 0;
     }
 
     private void CheckNearestConstruction()
     {
-        GameObject nearestConstruction = null;
-        float distance = float.PositiveInfinity;
-        foreach (Construction construction in _constructionInProgresse)
+        var nearestConstruction = _constructionInProgresse
+            .Where(construction => !construction.isTaken)
+            .OrderBy(construction => Vector3.Distance(agent.transform.position, construction.transform.position))
+            .FirstOrDefault();
+
+        if (nearestConstruction != null)
         {
-            if (Vector3.Distance(agent.transform.position, construction.transform.position) < distance)
-            {
-                nearestConstruction = construction.gameObject;
-                distance = Vector3.Distance(agent.transform.position, construction.transform.position);
-            }
+            nearestConstruction.isTaken = true;
+            _nearestConstruction = nearestConstruction.gameObject;
+            GoToRessource(
+                new Vector2Int((int)transform.position.x, (int)transform.position.y),
+                new Vector2Int((int)_nearestConstruction.transform.position.x, (int)_nearestConstruction.transform.position.y)
+            );
         }
-
-        _nearestConstruction = nearestConstruction;
-        GoToRessource(new Vector2Int((int)transform.position.x, (int)transform.position.y),
-            new Vector2Int((int)nearestConstruction.transform.position.x,
-                (int)nearestConstruction.transform.position.y));
     }
-
     #endregion
 
     #region Ressource
-
     private bool CheckRessource()
     {
         if ((_ressourceAct.GetWood() < _ressourceAct.maxRessource ||
@@ -177,7 +180,7 @@ public class ChoiceState : MonoBehaviour
             { "Meat", _ressourceAct.GetFood() }
         };
         GetLessRessource(actualRessource);
-        if (_ressourceNb+1 < _ressourceAct.maxRessource && _ressourceNb > 0)
+        if (_ressourceNb + 1 < _ressourceAct.maxRessource && _ressourceNb > 0)
         {
             isWorking = true;
             ChooseRessource(_ressourceMin);
@@ -198,15 +201,15 @@ public class ChoiceState : MonoBehaviour
         {
             _ressourceNb = woodTransform.childCount;
             _ressourceMin = "Wood";
-            if (_ressourceNb == 0 || _ressourceAct.GetWood()+ _ressourceNb >= _ressourceAct.maxRessource)
+            if (_ressourceNb == 0 || _ressourceAct.GetWood() + _ressourceNb >= _ressourceAct.maxRessource)
             {
                 _ressourceNb = rockTransform.childCount;
                 _ressourceMin = "Rock";
-                if (_ressourceNb == 0|| _ressourceAct.GetStone()+ _ressourceNb >= _ressourceAct.maxRessource)
+                if (_ressourceNb == 0 || _ressourceAct.GetStone() + _ressourceNb >= _ressourceAct.maxRessource)
                 {
                     _ressourceNb = meatTransform.childCount;
                     _ressourceMin = "Meat";
-                    if (_ressourceNb == 0|| _ressourceAct.GetFood()+ _ressourceNb >= _ressourceAct.maxRessource)
+                    if (_ressourceNb == 0 || _ressourceAct.GetFood() + _ressourceNb >= _ressourceAct.maxRessource)
                     {
                         _ressourceNb = -1;
                         isWorking = false;
@@ -219,30 +222,30 @@ public class ChoiceState : MonoBehaviour
 
     void ChooseRessource(string indexRessource)
     {
-        Transform[] ressourceTransform = null;
+        Ressource[] ressourceTransform = null;
         GameObject[] ressource = null;
 
 
         switch (indexRessource)
         {
             case "Wood": //Wood
-                ressourceTransform = woodTransform.transform.GetComponentsInChildren<Transform>();
+                ressourceTransform = woodTransform.transform.GetComponentsInChildren<Ressource>();
                 break;
             case "Rock": //Rock
-                ressourceTransform = rockTransform.transform.GetComponentsInChildren<Transform>();
+                ressourceTransform = rockTransform.transform.GetComponentsInChildren<Ressource>();
                 break;
             case "Meat": //Meat
-                ressourceTransform = meatTransform.transform.GetComponentsInChildren<Transform>();
+                ressourceTransform = meatTransform.transform.GetComponentsInChildren<Ressource>();
                 break;
         }
 
         if (ressourceTransform != null)
         {
             ressource = ressourceTransform.Select(t => t.gameObject).ToArray();
-            ressource = Utils.RemoveFirstIndex(ressource);
             if (ressource.Length != 0)
             {
                 GameObject nearestRessource = GetClosestRessource(ressource);
+                nearestRessource.GetComponent<Ressource>().isTaken = true;
                 GoToRessource(new Vector2Int((int)transform.position.x, (int)transform.position.y),
                     new Vector2Int((int)nearestRessource.transform.position.x,
                         (int)nearestRessource.transform.position.y));
@@ -255,20 +258,11 @@ public class ChoiceState : MonoBehaviour
 
     private GameObject GetClosestRessource(GameObject[] ressource)
     {
-        GameObject nearestProduct;
-        nearestProduct = ressource[0] ?? new GameObject();
-        foreach (GameObject res in ressource)
-        {
-            if (Vector3.Distance(this.transform.position, res.transform.position) <
-                Vector3.Distance(this.transform.position, nearestProduct.transform.position))
-            {
-                nearestProduct = res;
-            }
-        }
-
-        return nearestProduct;
+        return ressource
+            .Where(res => !res.GetComponent<Ressource>().isTaken)
+            .OrderBy(res => Vector3.Distance(transform.position, res.transform.position))
+            .FirstOrDefault();
     }
-
     #endregion
 
     private void GoToRessource(Vector2Int x, Vector2Int y)

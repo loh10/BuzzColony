@@ -54,7 +54,7 @@ public class Agent : MonoBehaviour
             if (col.gameObject.tag == "Wood")
             {
                 Destroy(col.gameObject);
-                RessourceAct.Instance.AddRessource(1,Ressource.Bois);
+                RessourceAct.Instance.AddRessource(1,ERessource.Bois);
                 choiceState.actTask = ActTask.Nothing;
                 choiceState.isWorking = false;
                 return;
@@ -62,7 +62,7 @@ public class Agent : MonoBehaviour
             else if (col.gameObject.tag == "Rock")
             {
                 Destroy(col.gameObject);
-                RessourceAct.Instance.AddRessource(1,Ressource.Roche);
+                RessourceAct.Instance.AddRessource(1,ERessource.Roche);
                 choiceState.actTask = ActTask.Nothing;
                 choiceState.isWorking = false;
                 return;
@@ -70,7 +70,7 @@ public class Agent : MonoBehaviour
             else if (col.gameObject.tag == "Meat")
             {
                 Destroy(col.gameObject);
-                RessourceAct.Instance.AddRessource(1,Ressource.Nourriture);
+                RessourceAct.Instance.AddRessource(1,ERessource.Nourriture);
                 choiceState.actTask = ActTask.Nothing;
                 choiceState.isWorking = false;
                 return;
