@@ -145,7 +145,6 @@ public class ConstructionMenu : MonoBehaviour
         if (SaveAndLoad.Instance)
         {
             SaveAndLoad.Instance.SaveConstruction(constructionList, _nbConstruction);
-            SaveAndLoad.Instance.SaveGame();
         }
 
         _construction.GetComponent<Construction>().isPlace = true;

@@ -11,7 +11,6 @@ public class MenuManager : MonoBehaviour
     {
         SaveAndLoad.Instance.DeleteSaveFile();
         SaveAndLoad.Instance.SaveMap(seed);
-        SaveAndLoad.Instance.SaveGame();
         SceneManager.LoadScene(1);
     }
 

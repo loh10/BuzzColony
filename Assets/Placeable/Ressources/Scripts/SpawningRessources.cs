@@ -40,29 +40,30 @@ public class SpawningRessources : MonoBehaviour
             GameObject objectToConstruct = null;
             string objectName;
             objectName = Utils.NumberRemover(ressource.Key);
+            ERessource ressourceType = ERessource.Null;
             if (objectName == "Wood")
             {
                 objectToConstruct = _wood;
-                _ressourceCreate.GetComponent<Ressource>().nameERessource = ERessource.Bois;
+                ressourceType = ERessource.Bois;
                 _tagToAdd = "Wood";
             }
             else if (objectName == "Rock")
             {
                 objectToConstruct = _rock;
-                _ressourceCreate.GetComponent<Ressource>().nameERessource = ERessource.Roche;
+                ressourceType = ERessource.Roche;
                 _tagToAdd = "Rock";
             }
             else if (objectName == "Meat")
             {
                 objectToConstruct = _meat;
-                _ressourceCreate.GetComponent<Ressource>().nameERessource = ERessource.Nourriture;
+                ressourceType = ERessource.Nourriture;
                 _tagToAdd = "Meat";
             }
 
             _ressourceCreate = Instantiate(objectToConstruct, _spawning.StringToVector2(ressource.Value),
                 Quaternion.identity, this.transform);
             SetParent(objectName,_ressourceCreate);
-
+            _ressourceCreate.GetComponent<Ressource>().nameERessource = ressourceType;
             _ressourceCreate.tag = _tagToAdd;
         }
 
@@ -88,9 +89,7 @@ public class SpawningRessources : MonoBehaviour
                     if (SaveAndLoad.Instance)
                     {
                         SaveAndLoad.Instance.SaveRessource(ressourceList, index);
-                        SaveAndLoad.Instance.SaveGame();
                     }
-
                     RessourceAct.Instance.UseClick();
                 }
             }

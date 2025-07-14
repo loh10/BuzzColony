@@ -24,7 +24,7 @@ public class ChoiceState : MonoBehaviour
     public bool randomPath;
 
     public ActTask actTask = ActTask.Nothing;
-    public bool isWorking = false;
+    public bool isWorking;
     private Settler _settler;
 
     #region Ressource
@@ -172,9 +172,9 @@ public class ChoiceState : MonoBehaviour
     #region Ressource
     private bool CheckRessource()
     {
-        if ((_ressourceAct.GetWood() < _ressourceAct.maxRessource ||
+        if (_ressourceAct.GetWood() < _ressourceAct.maxRessource ||
              _ressourceAct.GetStone() < _ressourceAct.maxRessource ||
-             _ressourceAct.GetFood() < _ressourceAct.maxRessource))
+             _ressourceAct.GetFood() < _ressourceAct.maxRessource)
         {
             return true;
         }
@@ -206,7 +206,7 @@ public class ChoiceState : MonoBehaviour
         _ressourceNb = 0;
         var minRessource = ressource.OrderBy(_ressource => _ressource.Value);
         _ressourceMin = minRessource.First().Key;
-        //check bois plus petit
+        //check less wood
         while (_ressourceNb == 0)
         {
             _ressourceNb = woodTransform.childCount;
@@ -233,25 +233,23 @@ public class ChoiceState : MonoBehaviour
     void ChooseRessource(string indexRessource)
     {
         Ressource[] ressourceTransform = null;
-        GameObject[] ressource = null;
-
 
         switch (indexRessource)
         {
-            case "Wood": //Wood
+            case "Wood":
                 ressourceTransform = woodTransform.transform.GetComponentsInChildren<Ressource>();
                 break;
-            case "Rock": //Rock
+            case "Rock":
                 ressourceTransform = rockTransform.transform.GetComponentsInChildren<Ressource>();
                 break;
-            case "Meat": //Meat
+            case "Meat":
                 ressourceTransform = meatTransform.transform.GetComponentsInChildren<Ressource>();
                 break;
         }
 
         if (ressourceTransform != null)
         {
-            ressource = ressourceTransform.Select(t => t.gameObject).ToArray();
+            var ressource = ressourceTransform.Select(t => t.gameObject).ToArray();
             if (ressource.Length != 0)
             {
                 GameObject nearestRessource = GetClosestRessource(ressource);
@@ -274,10 +272,20 @@ public class ChoiceState : MonoBehaviour
 
     private GameObject GetClosestRessource(GameObject[] ressource)
     {
+        UntakeAllRessource( ressource);
         return ressource
             .Where(res => !res.GetComponent<Recoltable>().isTaken)
             .OrderBy(res => Vector3.Distance(transform.position, res.transform.position))
             .FirstOrDefault();
+    }
+
+    private void UntakeAllRessource(GameObject[] ressource)
+    {
+        foreach (GameObject rsc in ressource)
+        {
+            rsc.GetComponent<Recoltable>().isTaken = false;
+            rsc.GetComponent<Recoltable>().asignedSettler = null;
+        }
     }
     #endregion
 

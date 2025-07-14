@@ -70,23 +70,27 @@ public class SaveAndLoad : MonoBehaviour
     public void SaveMap(int seed)
     {
         _seed = seed;
+        SaveInformation();
     }
 
     public void SaveConstruction(Dictionary<string, string> construction, int nbConstruction)
     {
         _construction = construction;
         _nbConstruction = nbConstruction;
+        SaveInformation();
     }
 
     public void SaveRessource(Dictionary<string, string> ressource, int nbRessource)
     {
         _ressource = ressource;
         _nbRessource = nbRessource;
+        SaveInformation();
     }
 
     public void SaveColon(int index, string position)
     {
         _colon.Add(index, position);
+        SaveInformation();
     }
 
     public void SaveRessourceAct(int Wood, int Stone, int Food,int Click)
@@ -95,6 +99,7 @@ public class SaveAndLoad : MonoBehaviour
         nbStone = Stone;
         nbFood = Food;
         nbClick = Click;
+        SaveInformation();
     }
 
     private void SaveInformation()

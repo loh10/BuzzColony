@@ -28,7 +28,6 @@ public class MessageBtn : MonoBehaviour
             if (SaveAndLoad.Instance)
             {
                 SaveAndLoad.Instance.SaveColon(index, allChildren[index].transform.position.ToString());
-                SaveAndLoad.Instance.SaveGame();
             }
             Destroy(gameObject.transform.parent.gameObject);
         } 
